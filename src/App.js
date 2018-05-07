@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './components/Card';
+import DeckWorkout from './components/DeckWorkout';
 import { createStore, combineReducers } from 'redux';
 import * as reducers from './reducers';
 import './App.css';
@@ -12,12 +12,12 @@ var store = createStore(
 class App extends Component {
   render() {
     return (
-        <Provider store={store}>
-        </Provider>
+        <DeckWorkout />
     );
   }
 }
 
 export default App;
 
-store.dispatch();
+// This is how you do your init thing
+// store.dispatch();
