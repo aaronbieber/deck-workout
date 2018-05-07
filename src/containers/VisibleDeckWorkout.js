@@ -7,13 +7,9 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {};
-};
 
 const VisibleDeckWorkout = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(DeckWorkout);
 
 export default VisibleDeckWorkout;
