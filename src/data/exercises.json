@@ -1,0 +1,32 @@
+{
+    "upper": [
+        "Hydraulics",
+        "Star push-ups",
+        "Pike push-ups",
+        "Push-ups",
+        "Military push-ups"
+    ],
+
+    "lower": [
+        "Box jumps",
+        "Air squats",
+        "Jump squats",
+        "Prisoner squats",
+        "Side lunges",
+        "Lunges",
+        "Bear squats",
+        "Speed squats"
+    ],
+
+    "core": [
+        "Reverse crunches",
+        "Bicycle crunches",
+        "Scissor kicks",
+        "Heel touches",
+        "Toe touches",
+        "Sit-ups",
+        "Crunches",
+        "Russian twists",
+        "Mountain climbers"
+    ]
+}

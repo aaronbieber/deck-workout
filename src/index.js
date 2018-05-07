@@ -1,8 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
-import App from './App';
+import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createStore, combineReducers } from 'redux';
+import * as reducers from './reducers';
+
+var reducer = combineReducers(reducers);
+var store = createStore(reducer);
+
+render(<Root store={ store } />, document.getElementById('root'));
 registerServiceWorker();
