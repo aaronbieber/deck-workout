@@ -17,6 +17,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "react-devtools": "^3.2.1",
     "redux-devtools": "^3.4.1"
   }
 }
