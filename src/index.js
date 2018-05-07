@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import './index.css';
 import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
+import { generate } from './actions';
 
 import { createStore, combineReducers } from 'redux';
 import * as reducers from './reducers';
@@ -12,3 +13,4 @@ var store = createStore(reducer);
 
 render(<Root store={ store } />, document.getElementById('root'));
 registerServiceWorker();
+store.dispatch(generate());
