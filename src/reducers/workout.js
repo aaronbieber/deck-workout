@@ -15,16 +15,22 @@ const initialState = {
 //     return data.filter(ex => ex.fast == fast)
 // }
 
+const spliceExercise = exercises => {
+    return exercises.splice(Math.floor(Math.random() * exercises.length))[0];
+}
+
 export default function workout(state = initialState, action) {
     switch (action.type) {
     case types.GENERATE:
         var groups = Object.keys(data);
         var randGroup = groups[Math.floor(Math.random() * groups.length)];
+        var upper = data["upper"];
+
         var newExercises = {
-            'hearts':   data["upper"][Math.floor(Math.random() * data["upper"].length)]["name"],
-            'diamonds': data["lower"][Math.floor(Math.random() * data["lower"].length)]["name"],
-            'clubs':    data["core"][Math.floor(Math.random() * data["core"].length)]["name"],
-            'spades':   data[randGroup][Math.floor(Math.random() * data[randGroup].length)]["name"]
+            'hearts':   spliceExercise(data["upper"])["name"],
+            'diamonds': spliceExercise(data["lower"])["name"],
+            'clubs':    spliceExercise(data["core"])["name"],
+            'spades':   spliceExercise(data[randGroup])["name"]
         };
         return Object.assign({}, state, { exercises: newExercises });
 
