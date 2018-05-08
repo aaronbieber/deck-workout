@@ -5,3 +5,9 @@ export const generate = () => {
         type: types.GENERATE
     };
 };
+
+export const draw = () => {
+    return {
+        type: types.DRAW
+    };
+};

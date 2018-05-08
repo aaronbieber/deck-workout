@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CardRow from './CardRow';
 import NavBar from './NavBar';
+import DrawControls from './DrawControls';
 
 export default class DeckWorkout extends Component {
     render() {
@@ -15,6 +16,8 @@ export default class DeckWorkout extends Component {
                     return <CardRow key={ key } suit={ suit } exercise={ e }/>
                 })}
               </div>
+
+              <DrawControls />
             </div>
         );
     }
