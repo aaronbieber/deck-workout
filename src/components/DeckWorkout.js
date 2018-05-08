@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import CardRow from './CardRow';
 import NavBar from './NavBar';
 
 export default class DeckWorkout extends Component {
@@ -12,7 +12,7 @@ export default class DeckWorkout extends Component {
                 {Object.keys(this.props.exercises).map(suit => {
                     var e = this.props.exercises[suit];
                     var key = 'card-' + suit;
-                    return <Card key={ key } suit={ suit } exercise={ e }/>
+                    return <CardRow key={ key } suit={ suit } exercise={ e }/>
                 })}
               </div>
             </div>
