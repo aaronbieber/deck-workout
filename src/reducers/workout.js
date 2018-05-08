@@ -24,7 +24,6 @@ export default function workout(state = initialState, action) {
     case types.GENERATE:
         var groups = Object.keys(data);
         var randGroup = groups[Math.floor(Math.random() * groups.length)];
-        console.log(randGroup);
 
         var newExercises = {
             'hearts':   spliceExercise(data["upper"])["name"],
