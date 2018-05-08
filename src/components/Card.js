@@ -23,14 +23,13 @@ export default class Card extends Component {
 
         var suitSymbol = suitSymbols[this.props.suit]["symbol"];
         var suitColor  = suitSymbols[this.props.suit]["color"];
-        var suitClass  = "col-2 suit-" + suitColor;
+        var suitClass  = "suit-" + suitColor;
 
         return (
             <div className="columns">
-              <div className="col-3" />
-              <div className={ suitClass }>{ suitSymbol }</div>
-              <div className="col-4">{ this.props.exercise }</div>
-              <div className="col-3" />
+              <div className="playing-card column col-4 col-md-12 col-mx-auto">
+                <span className={ suitClass }>{ suitSymbol }</span> { this.props.exercise }
+              </div>
             </div>
         );
     }

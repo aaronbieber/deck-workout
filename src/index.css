@@ -4,10 +4,34 @@ body {
   font-family: sans-serif;
 }
 
+.container {
+    padding: 0;
+}
+
 .suit-red {
     color: red;
 }
 
 .suit-black {
     color: black;
+}
+
+.playing-card {
+    white-space: nowrap;
+    font-size: 2em;
+    padding: 0 0.5em;
+}
+
+.navbar {
+    background-color: #e9ff5e;
+    color: black;
+}
+
+.navbar h1 {
+    font-size: 1.5em;
+    margin: 0.5em 0 0.5em 0;
+}
+
+.cards {
+    margin-top: 1em;
 }

@@ -16,7 +16,7 @@ const initialState = {
 // }
 
 const spliceExercise = exercises => {
-    return exercises.splice(Math.floor(Math.random() * exercises.length))[0];
+    return exercises.splice(Math.floor(Math.random() * exercises.length), 1)[0];
 }
 
 export default function workout(state = initialState, action) {
@@ -24,7 +24,7 @@ export default function workout(state = initialState, action) {
     case types.GENERATE:
         var groups = Object.keys(data);
         var randGroup = groups[Math.floor(Math.random() * groups.length)];
-        var upper = data["upper"];
+        console.log(randGroup);
 
         var newExercises = {
             'hearts':   spliceExercise(data["upper"])["name"],
