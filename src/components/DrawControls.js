@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as actions from '../actions';
 
 export default class DrawControls extends Component {
     render() {
@@ -9,7 +8,7 @@ export default class DrawControls extends Component {
                 <form className="form-horizontal" action="#">
                   <div className="form-group">
                     <div className="col-4 col-ml-1">
-                      <button onClick={actions.generate} className="btn">Regenerate</button>
+                      <button onClick={ this.props.generate } className="btn">Regenerate</button>
                     </div>
 
                     <div className="col-3 col-ml-1">

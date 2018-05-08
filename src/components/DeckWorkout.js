@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CardRow from './CardRow';
 import NavBar from './NavBar';
-import DrawControls from './DrawControls';
+import VisibleDrawControls from '../containers/VisibleDrawControls';
 
 export default class DeckWorkout extends Component {
     render() {
@@ -17,7 +17,7 @@ export default class DeckWorkout extends Component {
                 })}
               </div>
 
-              <DrawControls />
+              <VisibleDrawControls />
             </div>
         );
     }
