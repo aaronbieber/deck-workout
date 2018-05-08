@@ -24,12 +24,18 @@ export default function workout(state = initialState, action) {
     case types.GENERATE:
         var groups = Object.keys(data);
         var randGroup = groups[Math.floor(Math.random() * groups.length)];
+        var localData = {};
+
+        // slice(0) is a trick to get a clone of an array; we have to
+        // create a "deep clone" of this object because splice() is
+        // destructive (on purpose, to prevent duplicates)
+        groups.forEach(group => localData[group] = data[group].slice(0));
 
         var newExercises = {
-            'hearts':   spliceExercise(data["upper"])["name"],
-            'diamonds': spliceExercise(data["lower"])["name"],
-            'clubs':    spliceExercise(data["core"])["name"],
-            'spades':   spliceExercise(data[randGroup])["name"]
+            'hearts':   spliceExercise(localData["upper"])["name"],
+            'diamonds': spliceExercise(localData["lower"])["name"],
+            'clubs':    spliceExercise(localData["core"])["name"],
+            'spades':   spliceExercise(localData[randGroup])["name"]
         };
         return Object.assign({}, state, { exercises: newExercises });
 
