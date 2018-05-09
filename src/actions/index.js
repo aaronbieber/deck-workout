@@ -11,3 +11,9 @@ export const draw = () => {
         type: types.DRAW
     };
 };
+
+export const toggleDrawThree = () => {
+    return {
+        type: types.TOGGLE_DRAW_THREE
+    };
+}

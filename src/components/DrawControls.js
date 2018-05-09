@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Switch from './Switch';
 
 export default class DrawControls extends Component {
     render() {
@@ -12,14 +13,12 @@ export default class DrawControls extends Component {
                     </div>
 
                     <div className="col-3 col-ml-1">
-                      <button className="btn btn-primary">Draw</button>
+                      <button onClick={ this.props.draw } className="btn btn-primary">Draw</button>
                     </div>
 
                     <div className="col-4">
-                      <label className="form-switch">
-                        <input type="checkbox" name="draw3" />
-                        <i className="form-icon"></i> Draw 3
-                      </label>
+                      <Switch name="draw3"
+                              label="Draw 3" />
                     </div>
                   </div>
                 </form>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CardRow from './CardRow';
 import NavBar from './NavBar';
 import VisibleDrawControls from '../containers/VisibleDrawControls';
+import PlaySurface from './PlaySurface';
 
 export default class DeckWorkout extends Component {
     render() {
@@ -18,6 +19,8 @@ export default class DeckWorkout extends Component {
               </div>
 
               <VisibleDrawControls />
+
+              <PlaySurface />
             </div>
         );
     }

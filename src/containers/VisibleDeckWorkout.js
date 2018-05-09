@@ -7,7 +7,6 @@ const mapStateToProps = state => {
     };
 };
 
-
 const VisibleDeckWorkout = connect(
     mapStateToProps
 )(DeckWorkout);
