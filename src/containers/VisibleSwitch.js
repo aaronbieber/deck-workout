@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
+import { toggleDrawThree } from '../actions';
 import Switch from '../components/Switch';
 
 const mapStateToProps = state => {
     return {
-
+        drawCount: state.workout.drawCount
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        toggleChecked: dispatch(toggleDrawThree())
+        toggleChecked: function() { dispatch(toggleDrawThree()); }
     };
 }
 

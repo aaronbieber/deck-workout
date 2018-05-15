@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import data from '../data/exercises';
 
 const initialState = {
-    drawCount: 1,
+    drawCount: 3,
     exercises: {
         'hearts': '...',
         'diamonds': '...',
@@ -51,6 +51,7 @@ export default function workout(state = initialState, action) {
             'clubs':    spliceExercise(localData["core"])["name"],
             'spades':   spliceExercise(localData[randGroup])["name"]
         };
+        console.log('generate: draw count: ' + state.drawCount);
         return Object.assign({}, state, {
             exercises: newExercises,
             deck: buildDeck()
@@ -69,7 +70,23 @@ export default function workout(state = initialState, action) {
         return newState;
 
     case types.TOGGLE_DRAW_THREE:
-        break;
+        console.log('toggle draw three');
+        console.log('draw count: ' + state.drawCount);
+        var drawCount;
+
+        if (state.drawCount === 3) {
+            drawCount = 1;
+        } else {
+            drawCount = 3;
+        }
+
+        newState = Object.assign({}, state, {
+            drawCount
+        });
+
+        console.log(newState);
+
+        return newState;
 
     default:
     return state;
