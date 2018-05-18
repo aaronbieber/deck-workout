@@ -3,6 +3,7 @@ import CardRow from './CardRow';
 import NavBar from './NavBar';
 import VisibleDrawControls from '../containers/VisibleDrawControls';
 import PlaySurface from './PlaySurface';
+import VisibleCardTable from '../containers/VisibleCardTable';
 
 export default class DeckWorkout extends Component {
     render() {
@@ -20,7 +21,7 @@ export default class DeckWorkout extends Component {
 
               <VisibleDrawControls />
 
-              <PlaySurface />
+              <VisibleCardTable />
             </div>
         );
     }
