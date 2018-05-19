@@ -103,19 +103,24 @@ const drawThree = (state) => {
     //
     // If you are suddenly drawing fewer cards, discard the extra
     // cards.
-    if (newState.drawCount > state.drawCount) {
-        // Suddenly drawing more
-        for (i=0; i<(newState.drawCount - state.drawCount); i++) {
-            if (newState.discard.length > 0) {
-                newState.draw.push(newState.discard.pop());
-            } else if (newState.deck.length > 0) {
-                newState.draw.push(newState.deck.pop());
+    //
+    // If you haven't drawn anything yet, only change the number,
+    // because game state will not be affected.
+    if (newState.draw.length > 0) {
+        if (newState.drawCount > state.drawCount) {
+            // Suddenly drawing more
+            for (i=0; i<(newState.drawCount - state.drawCount); i++) {
+                if (newState.discard.length > 0) {
+                    newState.draw.push(newState.discard.pop());
+                } else if (newState.deck.length > 0) {
+                    newState.draw.push(newState.deck.pop());
+                }
             }
-        }
-    } else {
-        // Suddenly drawing fewer
-        for (i=0; i<(state.drawCount - newState.drawCount); i++) {
-            newState.discard.push(newState.draw.pop());
+        } else {
+            // Suddenly drawing fewer
+            for (i=0; i<(state.drawCount - newState.drawCount); i++) {
+                newState.discard.push(newState.draw.pop());
+            }
         }
     }
 
