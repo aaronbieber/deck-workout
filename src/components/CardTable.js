@@ -33,7 +33,7 @@ export default class CardTable extends Component {
     }
 
     cardImages = (cards) => {
-        var src, idx;
+        var src;
         var images = [];
 
         if (cards.length === 0) {
