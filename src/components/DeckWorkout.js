@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CardRow from './CardRow';
 import NavBar from './NavBar';
 import VisibleDrawControls from '../containers/VisibleDrawControls';
-import PlaySurface from './PlaySurface';
+// import PlaySurface from './PlaySurface';
 import VisibleCardTable from '../containers/VisibleCardTable';
 
 export default class DeckWorkout extends Component {

@@ -3,7 +3,8 @@ import { generate, draw, toggleDrawThree } from '../actions';
 import DrawControls from '../components/DrawControls';
 
 const mapStateToProps = state => ({
-
+    deck: state.workout.deck,
+    discard: state.workout.discard
 });
 
 const mapDispatchToProps = dispatch => ({

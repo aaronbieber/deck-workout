@@ -5,6 +5,12 @@ export default class DrawControls extends Component {
 
     _generate = (e) => {
         e.preventDefault();
+
+        if (this.props.deck.length < 52) {
+            var confirmRestart = window.confirm("Really start over?");
+            if (!confirmRestart) return;
+        }
+
         this.props.generate();
     }
 
@@ -18,22 +24,28 @@ export default class DrawControls extends Component {
     }
 
     render() {
+        var remainingCards = this.props.deck.length;
+        var drawButtonClass = "btn btn-primary"
+        if (remainingCards < 1) {
+            drawButtonClass += " disabled"
+        }
+
         return (
             <div className="columns controls">
               <div className="column col-11 col-mx-auto">
                 <form className="form-horizontal" action="#" onSubmit={ this._submit }>
                   <div className="form-group">
-                    <div className="col-4 col-ml-1">
+                    <div className="col-4">
                       <button onClick={ this._generate } className="btn">Regenerate</button>
                     </div>
 
-                    <div className="col-3 col-ml-1">
-                      <button onClick={ this._draw } className="btn btn-primary">Draw</button>
-                    </div>
-
-                    <div className="col-4">
+                    <div className="col-4" style={{ textAlign: 'center' }}>
                       <VisibleSwitch name="draw3"
                                      label="Draw 3" />
+                    </div>
+
+                    <div className="col-4" style={{ textAlign: 'right' }}>
+                      <button onClick={ this._draw } className={drawButtonClass}>Draw ({remainingCards})</button>
                     </div>
                   </div>
                 </form>

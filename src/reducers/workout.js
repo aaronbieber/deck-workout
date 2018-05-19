@@ -10,7 +10,8 @@ const initialState = {
         'spades': '...'
     },
     deck: [],
-    draw: []
+    draw: [],
+    discard: []
 };
 
 // This will come in handy when we support the UI to choose a fast workout
@@ -66,14 +67,15 @@ const draw = (state, drawCountPref) => {
     var newState = cloneState(state);
     var drawCount = Math.min(newState["deck"].length, state.drawCount);
 
-    console.log(newState);
+    // Discard previously drawn cards, if any
+    newState["discard"].concat(newState["draw"]);
+    newState["draw"] = [];
 
     for (var i=0; i<drawCount; i++) {
         newState["draw"].push(
-            newState["deck"].splice(Math.floor(Math.random() * newState["deck"].length), 1)
+            newState["deck"].splice(Math.floor(Math.random() * newState["deck"].length), 1)[0]
         );
     }
-    console.log(newState);
     return newState;
 }
 
