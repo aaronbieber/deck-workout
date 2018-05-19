@@ -5,12 +5,13 @@ import CardTable from '../components/CardTable';
 const mapStateToProps = state => {
     return {
         drawCount: state.workout.drawCount,
-        cards: state.workout.draw
+        draw: state.workout.draw,
+        deck: state.workout.deck
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    draw: () => dispatch(draw())
+    drawClick: () => dispatch(draw())
 });
 
 const VisibleCardTable = connect(
