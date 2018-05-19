@@ -55,10 +55,19 @@ const generate = (state) => {
         'spades':   spliceExercise(localData[randGroup])["name"]
     };
 
-    console.log('generate: draw count: ' + state.drawCount);
+    // Shuffle deck
+    var sortedDeck = buildDeck();
+    var shuffledDeck = [];
+
+    while (sortedDeck.length > 0) {
+        shuffledDeck.push(
+            sortedDeck.splice(Math.floor(Math.random() * sortedDeck.length), 1)[0]
+        )
+    }
+
     return Object.assign({}, state, {
         exercises: newExercises,
-        deck: buildDeck(),
+        deck: shuffledDeck,
         draw: []
     });
 }
@@ -72,29 +81,43 @@ const draw = (state, drawCountPref) => {
     newState["draw"] = [];
 
     for (var i=0; i<drawCount; i++) {
-        newState["draw"].push(
-            newState["deck"].splice(Math.floor(Math.random() * newState["deck"].length), 1)[0]
-        );
+        newState["draw"].push(newState["deck"].pop());
     }
     return newState;
 }
 
 const drawThree = (state) => {
-    console.log('toggle draw three');
-    console.log('draw count: ' + state.drawCount);
-    var drawCount;
+    var i;
+    var newState = cloneState(state);
+    newState.drawCount = (newState.drawCount === 1) ? 3 : 1;
 
-    if (state.drawCount === 3) {
-        drawCount = 1;
+    // Toggling the draw count changes the drawn card array so that
+    // downstream display components aren't responsible for filtering
+    // or creating subsets of the app state. However, when you toggle
+    // the draw count, you want to maintain the state of the workout
+    // as much as possible.
+    //
+    // If you are suddenly drawing more cards, pull the extra cards
+    // from the discard pile first, and from the deck second (draw as
+    // few new cards as possible).
+    //
+    // If you are suddenly drawing fewer cards, discard the extra
+    // cards.
+    if (newState.drawCount > state.drawCount) {
+        // Suddenly drawing more
+        for (i=0; i<(newState.drawCount - state.drawCount); i++) {
+            if (newState.discard.length > 0) {
+                newState.draw.push(newState.discard.pop());
+            } else if (newState.deck.length > 0) {
+                newState.draw.push(newState.deck.pop());
+            }
+        }
     } else {
-        drawCount = 3;
+        // Suddenly drawing fewer
+        for (i=0; i<(state.drawCount - newState.drawCount); i++) {
+            newState.discard.push(newState.draw.pop());
+        }
     }
-
-    var newState = Object.assign({}, state, {
-        drawCount
-    });
-
-    console.log(newState);
 
     return newState;
 }
