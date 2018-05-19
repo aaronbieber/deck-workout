@@ -12,8 +12,6 @@ export default class Switch extends Component {
     }
 
     render() {
-        console.log('rendering: draw count = ' + this.props.drawCount);
-        console.log('rendering: checked = ' + (this._checked() ? 'true' : 'false'));
         return (
             <label
               onClick={ this._toggleChecked }

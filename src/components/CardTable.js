@@ -57,8 +57,6 @@ export default class CardTable extends Component {
     }
 
     render() {
-        console.log(this.props.draw);
-
         var cardTableClass = "drawn-cards";
         if (this.props.drawCount === 1) {
             cardTableClass += " draw-one";
