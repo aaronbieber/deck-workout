@@ -40,10 +40,9 @@ export default class CardTable extends Component {
             return [this.cardImageTag('/cards/2x/back-navy.png')];
         }
 
-        for (var i=1; i<=this.props.drawCount; i++) {
-            idx = cards.length - i;
-            src = this.cardFile(cards[idx][0], cards[idx][1]);
-            images.unshift(
+        for (var i=0; i<this.props.draw.length; i++) {
+            src = this.cardFile(cards[i][0], cards[i][1]);
+            images.push(
                 <img onClick={ this._drawClick } key={ src } src={ src } alt="playing card" />
             );
         }
