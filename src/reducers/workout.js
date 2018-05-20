@@ -27,8 +27,8 @@ const buildDeck = () => {
         }
     });
 
-    deck.push(['red_joker', '0']);
-    deck.push(['black_joker', '0']);
+    deck.push(['red_joker', 0]);
+    deck.push(['black_joker', 0]);
 
     return deck;
 }
@@ -75,7 +75,8 @@ const generate = (state) => {
     return Object.assign({}, state, {
         exercises: newExercises,
         deck: shuffledDeck,
-        draw: []
+        draw: [],
+        discard: []
     });
 }
 

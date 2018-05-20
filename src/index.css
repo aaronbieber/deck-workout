@@ -65,3 +65,12 @@ html, body {
     width: 50%;
     margin: 0;
 }
+
+.drawn-cards img.joker-value {
+    margin-right: -85px;
+}
+
+.first-joker img:first-child {
+    margin-bottom: 50px;
+    margin-right: -80px;
+}
