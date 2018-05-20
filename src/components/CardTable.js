@@ -78,7 +78,11 @@ export default class CardTable extends Component {
             cardTableClass += " draw-one";
         }
 
-        if (cardImages.length === 4) {
+        // Right now, this will only happen when a joker is drawn on a
+        // draw-one, or drawn as the first of a draw-three, otherwise
+        // the length of cardImages will always be 1 or 3.
+        if (cardImages.length === 2 ||
+            cardImages.length === 4) {
             cardTableClass += " first-joker";
         }
 
