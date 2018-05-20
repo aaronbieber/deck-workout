@@ -27,6 +27,9 @@ const buildDeck = () => {
         }
     });
 
+    deck.push(['red_joker', '0']);
+    deck.push(['black_joker', '0']);
+
     return deck;
 }
 
@@ -55,15 +58,19 @@ const generate = (state) => {
         'spades':   spliceExercise(localData[randGroup])["name"]
     };
 
-    // Shuffle deck
-    var sortedDeck = buildDeck();
-    var shuffledDeck = [];
+    // Reshuffle until we get a deck that doesn't begin with a joker
+    do {
+        var sortedDeck = buildDeck();
+        var shuffledDeck = [];
 
-    while (sortedDeck.length > 0) {
-        shuffledDeck.push(
-            sortedDeck.splice(Math.floor(Math.random() * sortedDeck.length), 1)[0]
-        )
-    }
+        // Shuffle deck
+        while (sortedDeck.length > 0) {
+            shuffledDeck.push(
+                sortedDeck.splice(Math.floor(Math.random() * sortedDeck.length), 1)[0]
+            )
+        }
+    } while (   shuffledDeck[shuffledDeck.length-1][0] === 'red_joker'
+             || shuffledDeck[shuffledDeck.length-1][0] === 'black_joker')
 
     return Object.assign({}, state, {
         exercises: newExercises,

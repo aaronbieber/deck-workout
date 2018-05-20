@@ -7,6 +7,10 @@ export default class CardTable extends Component {
             return '/cards/2x/back-navy.png';
         }
 
+        if (suit.indexOf("joker") > -1) {
+            return '/cards/2x/' + suit + '.png';
+        }
+
         var numToName = {
             14: '1',
             11: 'jack',
