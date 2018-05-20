@@ -38,8 +38,8 @@ html, body {
 }
 
 .controls {
-    margin-top: 1em;
-    padding-top: 1em;
+    margin-top: 1vw;
+    padding-top: 1vw;
     border-top: 1px solid silver;
 }
 
@@ -48,8 +48,13 @@ html, body {
 }
 
 .drawn-cards img {
-    width: 30%;
+    width: 50%;
     margin-right: 1%;
+    margin-left: -125px;
+}
+
+.drawn-cards img:first-child {
+    margin-left: 0;
 }
 
 .drawn-cards img:last-child {
