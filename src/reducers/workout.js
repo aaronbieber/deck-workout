@@ -84,12 +84,13 @@ const draw = (state, drawCountPref) => {
     var drawCount = Math.min(newState["deck"].length, state.drawCount);
 
     // Discard previously drawn cards, if any
-    newState["discard"].concat(newState["draw"]);
+    newState["discard"] = newState["discard"].concat(newState["draw"]);
     newState["draw"] = [];
 
     for (var i=0; i<drawCount; i++) {
         newState["draw"].push(newState["deck"].pop());
     }
+
     return newState;
 }
 
