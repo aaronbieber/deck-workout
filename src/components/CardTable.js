@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { cloneObject } from '../utils'
 
 export default class CardTable extends Component {
     cardFile = (suit, num) => {
@@ -36,9 +37,10 @@ export default class CardTable extends Component {
         return <img onClick={ this._drawClick } key={ src } src={ src } alt="playing card" />
     }
 
-    cardImages = (cards) => {
+    cardImages = (draw) => {
         var suit, num, src;
         var images = [];
+        var cards = cloneObject(draw);
 
         if (cards.length === 0) {
             return [this.cardImageTag('/cards/2x/back-navy.png')];
@@ -51,11 +53,15 @@ export default class CardTable extends Component {
             cards.unshift(this.props.discard[this.props.discard.length-1]);
         }
 
-        for (var i=0; i<this.props.draw.length; i++) {
-            suit = cards[i][0]
-            num = cards[i][1]
+        for (var i=0; i<cards.length; i++) {
+            if (cards[i][0] === "done") {
+                src = '/done.webp'
+            } else {
+                suit = cards[i][0]
+                num = cards[i][1]
+                src = this.cardFile(suit, num);
+            }
 
-            src = this.cardFile(suit, num);
             images.push(
                 <img onClick={ this._drawClick } key={ src } src={ src } alt="playing card" />
             );

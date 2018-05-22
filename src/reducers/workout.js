@@ -1,5 +1,6 @@
 import * as types from '../actions/actionTypes';
 import data from '../data/exercises';
+import { cloneObject } from '../utils'
 
 const initialState = {
     drawCount: 3,
@@ -37,10 +38,6 @@ const spliceExercise = exercises => {
     return exercises.splice(Math.floor(Math.random() * exercises.length), 1)[0];
 }
 
-const cloneState = (state) => {
-    return JSON.parse(JSON.stringify(state));
-}
-
 const generate = (state) => {
     var groups = Object.keys(data);
     var randGroup = groups[Math.floor(Math.random() * groups.length)];
@@ -72,6 +69,8 @@ const generate = (state) => {
     } while (   shuffledDeck[shuffledDeck.length-1][0] === 'red_joker'
              || shuffledDeck[shuffledDeck.length-1][0] === 'black_joker')
 
+    shuffledDeck.unshift(["done", 0])
+
     return Object.assign({}, state, {
         exercises: newExercises,
         deck: shuffledDeck,
@@ -81,7 +80,7 @@ const generate = (state) => {
 }
 
 const draw = (state, drawCountPref) => {
-    var newState = cloneState(state);
+    var newState = cloneObject(state);
     var drawCount = Math.min(newState["deck"].length, state.drawCount);
 
     // Discard previously drawn cards, if any
@@ -97,7 +96,7 @@ const draw = (state, drawCountPref) => {
 
 const drawThree = (state) => {
     var i;
-    var newState = cloneState(state);
+    var newState = cloneObject(state);
     newState.drawCount = (newState.drawCount === 1) ? 3 : 1;
 
     // Toggling the draw count changes the drawn card array so that
