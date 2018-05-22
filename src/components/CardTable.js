@@ -38,9 +38,10 @@ export default class CardTable extends Component {
     }
 
     cardImages = (draw) => {
-        var suit, num, src;
-        var images = [];
-        var cards = cloneObject(draw);
+        var suit, num, src
+        var images = []
+        var cards = cloneObject(draw)
+        var imageClass
 
         if (cards.length === 0) {
             return [this.cardImageTag('/cards/2x/back-navy.png')];
@@ -56,6 +57,7 @@ export default class CardTable extends Component {
         for (var i=0; i<cards.length; i++) {
             if (cards[i][0] === "done") {
                 src = '/done.webp'
+                imageClass = 'card-done'
             } else {
                 suit = cards[i][0]
                 num = cards[i][1]
@@ -63,7 +65,12 @@ export default class CardTable extends Component {
             }
 
             images.push(
-                <img onClick={ this._drawClick } key={ src } src={ src } alt="playing card" />
+                <img
+                  onClick={ this._drawClick }
+                  className={ imageClass }
+                  key={ src }
+                  src={ src }
+                  alt="playing card" />
             );
         }
 

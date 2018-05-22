@@ -52,6 +52,11 @@ html, body {
     margin-left: -30%;
 }
 
+.drawn-cards img.card-done {
+    width: 70%;
+    margin-top: 40px;
+}
+
 .drawn-cards img:first-child {
     margin-left: 0;
 }
