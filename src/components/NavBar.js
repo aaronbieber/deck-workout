@@ -6,7 +6,7 @@ export default class NavBar extends Component {
             <header className="navbar">
               <section></section>
               <section className="navbar-center">
-                <h1>Do a Deck!</h1>
+                <h1>Wednesday Project</h1>
               </section>
               <section></section>
             </header>
