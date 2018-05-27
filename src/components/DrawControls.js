@@ -7,7 +7,7 @@ export default class DrawControls extends Component {
     _generate = (e) => {
         e.preventDefault();
 
-        if (this.props.deck.length < 52) {
+        if (this.props.deck.length < 54) {
             var confirmRestart = window.confirm("Really start over?");
             if (!confirmRestart) return;
         }
