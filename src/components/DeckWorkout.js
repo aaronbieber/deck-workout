@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import CardRow from './CardRow';
-import NavBar from './NavBar';
-import VisibleDrawControls from '../containers/VisibleDrawControls';
-// import PlaySurface from './PlaySurface';
-import VisibleCardTable from '../containers/VisibleCardTable';
+import React, { Component } from 'react'
+import CardRow from './CardRow'
+import NavBar from './NavBar'
+import VisibleDrawControls from '../containers/VisibleDrawControls'
+import VisibleProgressBar from '../containers/VisibleProgressBar'
+import VisibleCardTable from '../containers/VisibleCardTable'
+import VisibleTimer from '../containers/VisibleTimer'
 
 export default class DeckWorkout extends Component {
     render() {
@@ -19,8 +20,9 @@ export default class DeckWorkout extends Component {
                 })}
               </div>
 
+              <VisibleProgressBar />
+              <VisibleTimer />
               <VisibleDrawControls />
-
               <VisibleCardTable />
             </div>
         );

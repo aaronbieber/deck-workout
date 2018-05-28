@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import VisibleSwitch from '../containers/VisibleSwitch';
-import VisibleProgressBar from '../containers/VisibleProgressBar';
 
 export default class DrawControls extends Component {
 
@@ -33,7 +32,6 @@ export default class DrawControls extends Component {
 
         return (
             <div className="columns controls">
-              <VisibleProgressBar />
               <div className="column col-11 col-mx-auto">
                 <form className="form-horizontal" action="#" onSubmit={ this._submit }>
                   <div className="form-group">

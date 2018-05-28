@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { draw } from '../actions';
+import { draw, timerStart, timerStop } from '../actions';
 import CardTable from '../components/CardTable';
 
 const mapStateToProps = state => {
@@ -12,7 +12,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    drawClick: () => dispatch(draw())
+    drawClick: () => dispatch(draw()),
+    timerStart: () => dispatch(timerStart()),
+    timerStop: () => dispatch(timerStop())
 });
 
 const VisibleCardTable = connect(

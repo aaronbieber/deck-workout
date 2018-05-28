@@ -79,7 +79,15 @@ export default class CardTable extends Component {
 
     _drawClick = (e) => {
         if (this.props.deck.length > 0) {
-            this.props.drawClick();
+            this.props.drawClick()
+
+            if (this.props.draw.length === 0) {
+                this.props.timerStart()
+            }
+
+            if (this.props.deck.length === 1) {
+                this.props.timerStop()
+            }
         }
     }
 

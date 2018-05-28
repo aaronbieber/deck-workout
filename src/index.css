@@ -19,7 +19,7 @@ html, body {
 
 .playing-card {
     white-space: nowrap;
-    font-size: 2em;
+    font-size: 1.8em;
     padding: 0 0.5em;
 }
 
@@ -35,11 +35,18 @@ html, body {
 
 .cards {
     margin-top: 1em;
+    padding-bottom: 1vw;
+    border-bottom: 1px solid silver;
 }
 
 .controls {
-    margin-top: 1vw;
-    border-top: 1px solid silver;
+}
+
+.timer {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
 }
 
 .drawn-cards {
