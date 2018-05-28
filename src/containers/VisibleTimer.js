@@ -5,6 +5,7 @@ import Timer from '../components/Timer'
 const mapStateToProps = state => ({
     start: state.timer.start,
     running: state.timer.running,
+    time: state.timer.time,
     inc: state.timer.inc
 });
 

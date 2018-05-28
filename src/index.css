@@ -59,9 +59,26 @@ html, body {
     margin-left: -30%;
 }
 
-.drawn-cards img.card-done {
-    width: 70%;
+.drawn-cards .card-done {
     margin-top: 40px;
+    position: relative;
+    text-align: center;
+}
+
+.drawn-cards .card-done img {
+    width: 70%;
+    margin-left: 0;
+}
+
+.drawn-cards .card-done span {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    font-size: 3.5em;
+    text-shadow: 2px 2px black;
+    font-weight: bold;
 }
 
 .drawn-cards img:first-child {

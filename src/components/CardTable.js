@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { cloneObject } from '../utils'
+import VisibleDoneCard from '../containers/VisibleDoneCard'
 
 export default class CardTable extends Component {
     cardFile = (suit, num) => {
@@ -33,15 +34,21 @@ export default class CardTable extends Component {
         return '/cards/2x/' + num + '_' + suitToSuit[suit] + '.png';
     }
 
-    cardImageTag = (src) => {
-        return <img onClick={ this._drawClick } key={ src } src={ src } alt="playing card" />
+    cardImageTag = (src, className) => {
+        return (
+            <img onClick={ this._drawClick }
+                 className={ className }
+                 key={ src }
+                 src={ src }
+                 alt="playing card" />
+        )
     }
 
     cardImages = (draw) => {
         var suit, num, src
         var images = []
         var cards = cloneObject(draw)
-        var imageClass
+        var imageClass = ''
 
         if (cards.length === 0) {
             return [this.cardImageTag('/cards/2x/back-navy.png')];
@@ -51,27 +58,20 @@ export default class CardTable extends Component {
         // display the last card of the previous draw for
         // reference.
         if (cards[0][0].indexOf('joker') > -1) {
-            cards.unshift(this.props.discard[this.props.discard.length-1]);
+            cards.unshift(this.props.discard[this.props.discard.length-1])
         }
 
         for (var i=0; i<cards.length; i++) {
             if (cards[i][0] === "done") {
-                src = '/done.webp'
-                imageClass = 'card-done'
+                images.push(<VisibleDoneCard key="card-done" />)
             } else {
                 suit = cards[i][0]
                 num = cards[i][1]
-                src = this.cardFile(suit, num);
+                src = this.cardFile(suit, num)
+
+                images.push(this.cardImageTag(src, imageClass))
             }
 
-            images.push(
-                <img
-                  onClick={ this._drawClick }
-                  className={ imageClass }
-                  key={ src }
-                  src={ src }
-                  alt="playing card" />
-            );
         }
 
         return images;

@@ -11,6 +11,8 @@ export default class DrawControls extends Component {
             if (!confirmRestart) return;
         }
 
+        this.props.timerStop();
+        this.props.timerReset();
         this.props.generate();
     }
 
