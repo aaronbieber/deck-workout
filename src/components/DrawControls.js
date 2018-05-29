@@ -38,7 +38,7 @@ export default class DrawControls extends Component {
                 <form className="form-horizontal" action="#" onSubmit={ this._submit }>
                   <div className="form-group">
                     <div className="col-4">
-                      <button onClick={ this._generate } className="btn">Regenerate</button>
+                      <button onClick={ this._generate } className="btn">Random</button>
                     </div>
 
                     <div className="col-4" style={{ textAlign: 'center' }}>
