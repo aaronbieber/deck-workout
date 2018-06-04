@@ -1,5 +1,5 @@
-import * as types from '../actions/actionTypes';
-import data from '../data/exercises';
+import * as types from '../actions/actionTypes'
+import data from '../data/exercises'
 import { cloneObject } from '../utils'
 
 const initialState = {
