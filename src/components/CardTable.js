@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { cloneObject } from '../utils'
 import VisibleDoneCard from '../containers/VisibleDoneCard'
+import debounce from 'lodash/debounce'
 
 export default class CardTable extends Component {
     cardFile = (suit, num) => {
@@ -78,7 +79,7 @@ export default class CardTable extends Component {
         return images;
     }
 
-    _drawClick = (e) => {
+    _drawClick = debounce((e) => {
         if (this.props.deck.length > 0) {
             this.props.drawClick()
 
@@ -90,7 +91,7 @@ export default class CardTable extends Component {
                 this.props.timerStop()
             }
         }
-    }
+    }, 200)
 
     render() {
         var cardTableClass = "drawn-cards",
