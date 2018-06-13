@@ -81,8 +81,6 @@ export default class CardTable extends Component {
 
     _drawClick = debounce((e) => {
         if (this.props.deck.length > 0) {
-            this.props.drawClick()
-
             if (this.props.draw.length === 0) {
                 this.props.timerStart()
             }
@@ -90,6 +88,8 @@ export default class CardTable extends Component {
             if (this.props.deck.length === 1) {
                 this.props.timerStop()
             }
+
+            this.props.drawClick()
         }
     }, 200)
 

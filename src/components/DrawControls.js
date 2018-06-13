@@ -18,6 +18,7 @@ export default class DrawControls extends Component {
 
     _draw = (e) => {
         e.preventDefault();
+        this.props.timerStart();
         this.props.draw();
     }
 
