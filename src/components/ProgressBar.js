@@ -1,12 +1,66 @@
 import React, { Component } from 'react';
 
 export default class ProgressBar extends Component {
+
+    totalReps(cards, start=0, end=cards.length-1) {
+        var reps = 0;
+        for (var i=start; i<=end; i++) {
+            reps += cards[i][1]
+
+            if (cards[i][0].indexOf("joker") > -1) {
+                reps += cards[i+1][1]
+            }
+        }
+
+        return reps
+    }
+
     render() {
-        var percentComplete = Math.ceil((this.props.discard.length/54)*100)
-        var width = percentComplete + '%';
+        var allCards = this.props.deck
+            .concat(this.props.draw.slice().reverse())
+            .concat(this.props.discard.slice().reverse())
+
+        var allReps = this.totalReps(allCards)
+
+        if (this.props.discard.length) {
+            var justDiscardedStartIndex = allCards.length-this.props.discard.length
+
+            var pctPrevCompleted = 0
+            var pctJustCompleted = Math.round((this.totalReps(allCards,
+                                                              justDiscardedStartIndex,
+                                                              justDiscardedStartIndex+this.props.drawCount-1)/allReps)*100)
+
+            // After the first discard, there is no "previous"
+            // discard, only the "just" discarded, so we'll go out of
+            // bounds if we try to do this; wait till the third draw
+            if (this.props.discard.length > this.props.drawCount) {
+                pctPrevCompleted = Math.round((this.totalReps(allCards,
+                                                              justDiscardedStartIndex+this.props.drawCount,
+                                                              allCards.length-1
+                                                             )/allReps)*100)
+            }
+
+            // If you're drawing one card at a time, any value less
+            // than 6 or 7 rounds to 0%, so just make it 1% so the
+            // progress bar slice is visible
+            if (pctJustCompleted === 0) {
+                pctJustCompleted = 1
+            }
+
+            // The rounding makes it possible to exceed 100, but CSS
+            // doesn't like that
+            if (pctJustCompleted + pctPrevCompleted > 100) {
+                pctJustCompleted = 100 - pctPrevCompleted
+            }
+
+            var widthJustCompleted = pctJustCompleted + '%'
+            var widthPrevCompleted = pctPrevCompleted + '%'
+        }
+
         return (
             <div className="progress-bar">
-              <div className="progress-progress" style={{ width: width }}/>
+              <div className="progress-progress" style={{ width: widthPrevCompleted }}/>
+              <div className="progress-progress progress-last" style={{ width: widthJustCompleted }}/>
             </div>
         )
     }

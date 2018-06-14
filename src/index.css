@@ -110,4 +110,10 @@ html, body {
     height: 10px;
     width: 0%;
     background-color: #ffe52b;
+    float: left;
+}
+
+.progress-last {
+    float: left;
+    background-color: #70e224;
 }
