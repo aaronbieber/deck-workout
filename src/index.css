@@ -117,3 +117,8 @@ html, body {
     float: left;
     background-color: #70e224;
 }
+
+.progress-next {
+    background-color: white;
+    border: 1px solid #70e224;
+}

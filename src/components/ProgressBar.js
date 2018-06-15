@@ -16,15 +16,25 @@ export default class ProgressBar extends Component {
     }
 
     render() {
+        var drawnProgressSegment,
+            widthDrawn,
+            pctDrawn = 0
         var allCards = this.props.deck
             .concat(this.props.draw.slice().reverse())
             .concat(this.props.discard.slice().reverse())
 
         var allReps = this.totalReps(allCards)
+        var justDiscardedStartIndex = allCards.length-this.props.discard.length
+
+        if (justDiscardedStartIndex > 1 && this.props.draw.length > 0) {
+            pctDrawn = Math.round((this.totalReps(allCards,
+                                                      justDiscardedStartIndex-this.props.drawCount,
+                                                      justDiscardedStartIndex-1)/allReps)*100)
+            widthDrawn = pctDrawn + '%'
+            drawnProgressSegment = <div className="progress-progress progress-next" style={{ width: widthDrawn }} />
+        }
 
         if (this.props.discard.length) {
-            var justDiscardedStartIndex = allCards.length-this.props.discard.length
-
             var pctPrevCompleted = 0
             var pctJustCompleted = Math.round((this.totalReps(allCards,
                                                               justDiscardedStartIndex,
@@ -47,10 +57,21 @@ export default class ProgressBar extends Component {
                 pctJustCompleted = 1
             }
 
+            if (pctDrawn === 0) {
+                pctDrawn = 1
+            }
+
             // The rounding makes it possible to exceed 100, but CSS
             // doesn't like that
-            if (pctJustCompleted + pctPrevCompleted > 100) {
-                pctJustCompleted = 100 - pctPrevCompleted
+            if (pctJustCompleted + pctPrevCompleted + pctDrawn > 100) {
+                pctJustCompleted = 100 - (pctPrevCompleted + pctDrawn)
+                pctDrawn = 100 - (pctJustCompleted + pctPrevCompleted)
+            }
+
+            if (justDiscardedStartIndex === 1) {
+                pctPrevCompleted = 100
+                pctJustCompleted = 0
+                pctDrawn = 0
             }
 
             var widthJustCompleted = pctJustCompleted + '%'
@@ -59,8 +80,9 @@ export default class ProgressBar extends Component {
 
         return (
             <div className="progress-bar">
-              <div className="progress-progress" style={{ width: widthPrevCompleted }}/>
-              <div className="progress-progress progress-last" style={{ width: widthJustCompleted }}/>
+              <div className="progress-progress" style={{ width: widthPrevCompleted }} />
+              <div className="progress-progress progress-last" style={{ width: widthJustCompleted }} />
+              { drawnProgressSegment }
             </div>
         )
     }
