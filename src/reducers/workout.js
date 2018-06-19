@@ -11,6 +11,8 @@ const initialState = {
         'spades': '...'
     },
     deck: [],
+    drawIndex: null,
+    discardIndex: null,
     draw: [],
     discard: []
 };
@@ -75,63 +77,46 @@ const generate = (state) => {
         exercises: newExercises,
         deck: shuffledDeck,
         draw: [],
+        drawIndex: null,
+        discardIndex: null,
         discard: []
     });
 }
 
-const draw = (state, drawCountPref) => {
-    var newState = cloneObject(state);
-    var drawCount = Math.min(newState["deck"].length, state.drawCount);
-
-    // Discard previously drawn cards, if any
-    newState["discard"] = newState["discard"].concat(newState["draw"]);
-    newState["draw"] = [];
-
-    for (var i=0; i<drawCount; i++) {
-        newState["draw"].push(newState["deck"].pop());
+const buildCardPiles = (state) => {
+    if (state["drawIndex"] !== null) {
+        if (state["drawIndex"] === 0) {
+            state["draw"] = state["deck"].slice(0,1)
+            state["discard"] = state["deck"].slice(1)
+        } else {
+            state["draw"] = state["deck"].slice(state["drawIndex"],
+                                                state["drawIndex"] + state["drawCount"])
+            state["discard"] = state["deck"].slice(state["drawIndex"] + state["drawCount"])
+        }
     }
 
+    return state
+}
+
+const draw = (state, drawCountPref) => {
+    var newState = cloneObject(state);
+    // var drawCount = Math.min(newState["deck"].length, state.drawCount);
+
+    if (state["drawIndex"] === null) {
+        console.log("null drawIndex")
+        newState["drawIndex"] = state["deck"].length - state["drawCount"]
+    } else {
+        newState["drawIndex"] = Math.max(state["drawIndex"] - state["drawCount"], 0)
+    }
+
+    newState = buildCardPiles(newState)
     return newState;
 }
 
 const drawThree = (state) => {
-    var i;
-    var newState = cloneObject(state);
-    newState.drawCount = (newState.drawCount === 1) ? 3 : 1;
-
-    // Toggling the draw count changes the drawn card array so that
-    // downstream display components aren't responsible for filtering
-    // or creating subsets of the app state. However, when you toggle
-    // the draw count, you want to maintain the state of the workout
-    // as much as possible.
-    //
-    // If you are suddenly drawing more cards, pull the extra cards
-    // from the discard pile first, and from the deck second (draw as
-    // few new cards as possible).
-    //
-    // If you are suddenly drawing fewer cards, discard the extra
-    // cards.
-    //
-    // If you haven't drawn anything yet, only change the number,
-    // because game state will not be affected.
-    if (newState.draw.length > 0) {
-        if (newState.drawCount > state.drawCount) {
-            // Suddenly drawing more
-            for (i=0; i<(newState.drawCount - state.drawCount); i++) {
-                if (newState.discard.length > 0) {
-                    newState.draw.push(newState.discard.pop());
-                } else if (newState.deck.length > 0) {
-                    newState.draw.push(newState.deck.pop());
-                }
-            }
-        } else {
-            // Suddenly drawing fewer
-            for (i=0; i<(state.drawCount - newState.drawCount); i++) {
-                newState.discard.push(newState.draw.pop());
-            }
-        }
-    }
-
+    var newState = cloneObject(state)
+    newState.drawCount = (newState.drawCount === 1) ? 3 : 1
+    newState = buildCardPiles(newState)
     return newState;
 }
 

@@ -20,11 +20,11 @@ export default class ProgressBar extends Component {
             widthDrawn,
             pctDrawn = 0
         var allCards = this.props.deck
-            .concat(this.props.draw.slice().reverse())
-            .concat(this.props.discard.slice().reverse())
 
         var allReps = this.totalReps(allCards)
         var justDiscardedStartIndex = allCards.length-this.props.discard.length
+        console.log("allCards.length " + allCards.length)
+        console.log("discard.length " + this.props.discard.length)
 
         if (justDiscardedStartIndex > 1 && this.props.draw.length > 0) {
             pctDrawn = Math.round((this.totalReps(allCards,

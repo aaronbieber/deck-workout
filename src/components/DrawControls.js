@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import VisibleSwitch from '../containers/VisibleSwitch';
+import debounce from 'lodash/debounce'
 
 export default class DrawControls extends Component {
 
     _generate = (e) => {
         e.preventDefault();
 
-        if (this.props.deck.length < 54) {
+        if (this.props.draw.length) {
             var confirmRestart = window.confirm("Really start over?");
             if (!confirmRestart) return;
         }
@@ -16,11 +17,20 @@ export default class DrawControls extends Component {
         this.props.generate();
     }
 
-    _draw = (e) => {
-        e.preventDefault();
-        this.props.timerStart();
-        this.props.draw();
-    }
+
+    _draw = debounce((e) => {
+        if (this.props.deck.length > 0) {
+            if (this.props.draw.length === 0) {
+                this.props.timerStart()
+            }
+
+            if (this.props.deck.length === 1) {
+                this.props.timerStop()
+            }
+
+            this.props.drawClick()
+        }
+    }, 200)
 
     _submit = (e) => {
         e.preventDefault();

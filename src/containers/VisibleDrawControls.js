@@ -4,12 +4,13 @@ import DrawControls from '../components/DrawControls';
 
 const mapStateToProps = state => ({
     deck: state.workout.deck,
+    draw: state.workout.draw,
     discard: state.workout.discard
 });
 
 const mapDispatchToProps = dispatch => ({
     generate: () => dispatch(generate()),
-    draw: () => dispatch(draw()),
+    drawClick: () => dispatch(draw()),
     toggleDrawThree: () => dispatch(toggleDrawThree()),
     timerStart: () => dispatch(timerStart()),
     timerStop: () => dispatch(timerStop()),
