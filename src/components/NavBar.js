@@ -2,7 +2,18 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 
 export default class NavBar extends Component {
+    _undo = (e) => {
+        e.preventDefault()
+        this.props.undoClick()
+        this.props.timerRestart()
+    }
+
     render() {
+        var undoClass = "material-icons"
+        if (this.props.drawIndex === null || this.props.noUndo) {
+            undoClass += " unavailable"
+        }
+
         return (
             <header className="navbar">
               <section className="navbar-section navbar-icon">
@@ -10,9 +21,11 @@ export default class NavBar extends Component {
                   to="/"
                   activeClassName="hide-link"
                   exact={ true }>
-                  <img src="/images/back.png"
-                       alt="Back" />
+                  <i className="material-icons">arrow_back</i>
                 </NavLink>
+
+                <i className={ undoClass }
+                   onClick={ this._undo }>undo</i>
               </section>
               <section className="navbar-center">
                 <h1>Wednesday Project</h1>
@@ -21,8 +34,7 @@ export default class NavBar extends Component {
                 <NavLink
                   to="/settings"
                   activeClassName="hide-link">
-                  <img src="/images/settings.png"
-                       alt="Settings" />
+                  <i className="material-icons">settings</i>
                 </NavLink>
               </section>
             </header>

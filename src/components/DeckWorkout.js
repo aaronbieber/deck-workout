@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CardRow from './CardRow'
-import NavBar from './NavBar'
+import VisibleNavBar from '../containers/VisibleNavBar'
 import VisibleDrawControls from '../containers/VisibleDrawControls'
 import VisibleProgressBar from '../containers/VisibleProgressBar'
 import VisibleCardTable from '../containers/VisibleCardTable'
@@ -11,7 +11,7 @@ export default class DeckWorkout extends Component {
     render() {
         return (
             <div>
-              <NavBar />
+              <VisibleNavBar />
               <VisibleCards exercises={ this.props.exercises }/>
               <VisibleProgressBar />
               <VisibleTimer />

@@ -6,7 +6,7 @@ export default class Settings extends Component {
     render() {
         return (
             <div>
-              <NavBar />
+              <NavBar noUndo={ true } />
               <VisibleCards exercises={ this.props.exercises }/>
             </div>
         );

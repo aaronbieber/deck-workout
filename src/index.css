@@ -38,6 +38,14 @@ html, body {
     padding-right: 0.5em;
 }
 
+.navbar-icon a {
+    color: black;
+}
+
+.navbar-icon i.unavailable {
+    display: none;
+}
+
 .navbar-icon-right {
     text-align: right;
 }
