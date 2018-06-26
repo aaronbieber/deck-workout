@@ -72,6 +72,13 @@ export default function timer(state = initialState, action) {
             inc: 0
         })
 
+    case types.TIMER_RESTART:
+        return Object.assign({}, state, {
+            start: state.start,
+            running: true,
+            inc: state.inc
+        })
+
     case types.TIMER_TICK:
         if (state.running === false) {
             return state

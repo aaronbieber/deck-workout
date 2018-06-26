@@ -93,6 +93,9 @@ const buildCardPiles = (state) => {
                                                 state["drawIndex"] + state["drawCount"])
             state["discard"] = state["deck"].slice(state["drawIndex"] + state["drawCount"])
         }
+    } else {
+        state["draw"] = []
+        state["discard"] = []
     }
 
     return state
@@ -100,10 +103,8 @@ const buildCardPiles = (state) => {
 
 const draw = (state, drawCountPref) => {
     var newState = cloneObject(state);
-    // var drawCount = Math.min(newState["deck"].length, state.drawCount);
 
     if (state["drawIndex"] === null) {
-        console.log("null drawIndex")
         newState["drawIndex"] = state["deck"].length - state["drawCount"]
     } else {
         newState["drawIndex"] = Math.max(state["drawIndex"] - state["drawCount"], 0)
@@ -111,6 +112,23 @@ const draw = (state, drawCountPref) => {
 
     newState = buildCardPiles(newState)
     return newState;
+}
+
+const undo = (state) => {
+    var newState = cloneObject(state);
+
+    if(state["drawIndex"] >= state["deck"].length - state["drawCount"]) {
+        newState["drawIndex"] = null
+    } else if(state["drawIndex"] === 0) {
+        // The very end of the deck
+        newState["drawIndex"] = 1
+    } else {
+        newState["drawIndex"] = Math.min(state["drawIndex"] + state["drawCount"],
+                                         state["deck"].length - state["drawCount"])
+    }
+
+    newState = buildCardPiles(newState)
+    return newState
 }
 
 const drawThree = (state) => {
@@ -130,6 +148,9 @@ export default function workout(state = initialState, action) {
 
     case types.TOGGLE_DRAW_THREE:
         return drawThree(state);
+
+    case types.UNDO:
+        return undo(state);
 
     default:
     return state;

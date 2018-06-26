@@ -32,16 +32,23 @@ export default class DrawControls extends Component {
         }
     }, 200)
 
+    _undo = (e) => {
+        e.preventDefault()
+        this.props.undoClick()
+        this.props.timerRestart()
+    }
+
     _submit = (e) => {
         e.preventDefault();
     }
 
     render() {
-        var remainingCards = this.props.deck.length;
-        var drawButtonClass = "btn btn-primary"
-        if (remainingCards < 1) {
-            drawButtonClass += " disabled"
+        var undoButtonClass = "btn"
+        if (this.props.drawIndex === null) {
+            undoButtonClass += " disabled"
         }
+
+        // Remember to disable undo on the last card
 
         return (
             <div className="columns controls">
@@ -49,7 +56,7 @@ export default class DrawControls extends Component {
                 <form className="form-horizontal" action="#" onSubmit={ this._submit }>
                   <div className="form-group">
                     <div className="col-4">
-                      <button onClick={ this._generate } className="btn">Random</button>
+                      <button onClick={ this._undo } className={ undoButtonClass }>Undo</button>
                     </div>
 
                     <div className="col-4" style={{ textAlign: 'center' }}>
@@ -58,7 +65,7 @@ export default class DrawControls extends Component {
                     </div>
 
                     <div className="col-4" style={{ textAlign: 'right' }}>
-                      <button onClick={ this._draw } className={drawButtonClass}>Draw</button>
+                      <button onClick={ this._generate } className="btn">Randomize</button>
                     </div>
                   </div>
                 </form>

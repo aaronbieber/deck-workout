@@ -6,6 +6,7 @@ const mapStateToProps = state => {
     return {
         drawCount: state.workout.drawCount,
         draw: state.workout.draw,
+        drawIndex: state.workout.drawIndex,
         deck: state.workout.deck,
         discard: state.workout.discard
     };

@@ -4,13 +4,19 @@ export const generate = () => {
     return {
         type: types.GENERATE
     };
-};
+}
 
 export const draw = () => {
     return {
         type: types.DRAW
     };
-};
+}
+
+export const undo = () => {
+    return {
+        type: types.UNDO
+    }
+}
 
 export const toggleDrawThree = () => {
     return {
@@ -33,6 +39,12 @@ export const timerStop = () => {
 export const timerReset = () => {
     return {
         type: types.TIMER_RESET
+    }
+}
+
+export const timerRestart = () => {
+    return {
+        type: types.TIMER_RESTART
     }
 }
 

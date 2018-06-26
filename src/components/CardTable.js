@@ -60,7 +60,7 @@ export default class CardTable extends Component {
         // display the last card of the previous draw for
         // reference.
         if (cards[0][0].indexOf('joker') > -1) {
-            cards.unshift(this.props.discard[this.props.discard.length-1])
+            cards.unshift(this.props.discard[this.props.drawCount-1])
         }
 
         for (var i=0; i<cards.length; i++) {
@@ -80,17 +80,15 @@ export default class CardTable extends Component {
     }
 
     _drawClick = debounce((e) => {
-        if (this.props.deck.length > 0) {
-            if (this.props.draw.length === 0) {
-                this.props.timerStart()
-            }
-
-            if (this.props.deck.length === 1) {
-                this.props.timerStop()
-            }
-
-            this.props.drawClick()
+        if (this.props.drawIndex === null) {
+            this.props.timerStart()
         }
+
+        if (this.props.drawIndex === 1) {
+            this.props.timerStop()
+        }
+
+        this.props.drawClick()
     }, 200)
 
     render() {
