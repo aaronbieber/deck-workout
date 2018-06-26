@@ -33,6 +33,15 @@ html, body {
     margin: 0.5em 0 0.5em 0;
 }
 
+.navbar-icon {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.navbar-icon-right {
+    text-align: right;
+}
+
 .cards {
     margin-top: 1em;
     padding-bottom: 1vw;
@@ -121,4 +130,8 @@ html, body {
 .progress-next {
     background-color: white;
     border: 1px solid #70e224;
+}
+
+.hide-link {
+    display: none;
 }
