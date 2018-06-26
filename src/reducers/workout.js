@@ -5,10 +5,10 @@ import { cloneObject } from '../utils'
 const initialState = {
     drawCount: 3,
     exercises: {
-        'hearts': '...',
-        'diamonds': '...',
-        'clubs': '...',
-        'spades': '...'
+        hearts: '...',
+        diamonds: '...',
+        clubs: '...',
+        spades: '...'
     },
     deck: [],
     drawIndex: null,
@@ -51,10 +51,10 @@ const generate = (state) => {
     groups.forEach(group => localData[group] = data[group].slice(0));
 
     var newExercises = {
-        'hearts':   spliceExercise(localData["upper"])["name"],
-        'diamonds': spliceExercise(localData["lower"])["name"],
-        'clubs':    spliceExercise(localData["core"])["name"],
-        'spades':   spliceExercise(localData[randGroup])["name"]
+        hearts:   spliceExercise(localData["upper"])["name"],
+        diamonds: spliceExercise(localData["lower"])["name"],
+        clubs:    spliceExercise(localData["core"])["name"],
+        spades:   spliceExercise(localData[randGroup])["name"]
     };
 
     // Reshuffle until we get a deck that doesn't begin with a joker
