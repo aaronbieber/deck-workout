@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Exercises from '../components/Exercises.js'
+import Settings from '../components/Settings.js'
 
 const mapStateToProps = state => ({
     exercises: state.workout.exercises
@@ -8,9 +8,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 });
 
-const VisibleExercises = connect(
+const VisibleSettings = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Exercises);
+)(Settings);
 
-export default VisibleExercises;
+export default VisibleSettings;

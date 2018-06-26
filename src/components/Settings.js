@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar'
 import VisibleCards from '../containers/VisibleCards'
 
-export default class Exercises extends Component {
+export default class Settings extends Component {
     render() {
         return (
             <div>

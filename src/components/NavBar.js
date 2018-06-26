@@ -19,7 +19,7 @@ export default class NavBar extends Component {
               </section>
               <section className="navbar-section navbar-icon navbar-icon-right">
                 <NavLink
-                  to="/exercises"
+                  to="/settings"
                   activeClassName="hide-link">
                   <img src="/images/settings.png"
                        alt="Settings" />
