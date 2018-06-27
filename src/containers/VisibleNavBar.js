@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { timerAwareUndo, undo, timerRestart } from '../actions';
+import { timerAwareUndo, timerRestart } from '../actions';
 import NavBar from "../components/NavBar"
 
 
