@@ -48,13 +48,13 @@ const generate = (state) => {
     // slice(0) is a trick to get a clone of an array; we have to
     // create a "deep clone" of this object because splice() is
     // destructive (on purpose, to prevent duplicates)
-    groups.forEach(group => localData[group] = data[group].slice(0));
+    localData = cloneObject(data)
 
     var newExercises = {
-        hearts:   spliceExercise(localData["upper"])["name"],
-        diamonds: spliceExercise(localData["lower"])["name"],
-        clubs:    spliceExercise(localData["core"])["name"],
-        spades:   spliceExercise(localData[randGroup])["name"]
+        hearts:   spliceExercise(localData["upper"]["exercises"])["name"],
+        diamonds: spliceExercise(localData["lower"]["exercises"])["name"],
+        clubs:    spliceExercise(localData["core"]["exercises"])["name"],
+        spades:   spliceExercise(localData[randGroup]["exercises"])["name"]
     };
 
     // Reshuffle until we get a deck that doesn't begin with a joker
@@ -138,6 +138,12 @@ const drawThree = (state) => {
     return newState;
 }
 
+const setSuitExercise = (state, suit, exercise) => {
+    var newState = cloneObject(state)
+    newState.exercises[suit] = exercise
+    return newState
+}
+
 export default function workout(state = initialState, action) {
     switch (action.type) {
     case types.GENERATE:
@@ -151,6 +157,9 @@ export default function workout(state = initialState, action) {
 
     case types.UNDO:
         return undo(state);
+
+    case types.CHANGE_SUIT_EXERCISE:
+        return setSuitExercise(state, action.suit, action.exercise);
 
     default:
     return state;

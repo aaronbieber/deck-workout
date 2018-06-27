@@ -23,6 +23,11 @@ html, body {
     padding: 0 0.5em;
 }
 
+.playing-card i.material-icons {
+    float: right;
+    line-height: 1.5em;
+}
+
 .navbar {
     background-color: #e9ff5e;
     color: black;
@@ -142,4 +147,12 @@ html, body {
 
 .hide-link {
     display: none;
+}
+
+.form-radio {
+    display: block;
+}
+
+#exercise-selector .form-label {
+    font-weight: bold;
 }

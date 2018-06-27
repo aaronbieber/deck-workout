@@ -53,7 +53,7 @@ export default function timer(state = initialState, action) {
 
     case types.TIMER_START:
         return Object.assign({}, state, {
-            start: Math.floor(new Date().getTime() / 1000),
+            start: now(),
             running: true,
             inc: 0
         });

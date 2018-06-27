@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 export default class CardRow extends Component {
+    _edit = (e) => {
+        e.preventDefault()
+        this.props.editClick(this.props.suit)
+    }
+
     render() {
         var suitSymbols = {
             "hearts": {
@@ -28,6 +33,10 @@ export default class CardRow extends Component {
         return (
             <div className="columns">
               <div className="playing-card column col-4 col-md-12 col-mx-auto">
+                { this.props.edit
+                    ? <i className="material-icons" onClick={ this._edit }>edit</i>
+                    : null
+                }
                 <span className={ suitClass }>{ suitSymbol }</span> { this.props.exercise }
               </div>
             </div>

@@ -5,7 +5,6 @@ export default class NavBar extends Component {
     _undo = (e) => {
         e.preventDefault()
         this.props.undoClick()
-        this.props.timerRestart()
     }
 
     render() {

@@ -1,98 +1,107 @@
 {
-    "upper": [
-        {
-            "name": "Hydraulics",
-            "fast": false
-        },
-        {
-            "name": "Star push-ups",
-            "fast": true
-        },
-        {
-            "name": "Pike push-ups",
-            "fast": true
-        },
-        {
-            "name": "Push-ups",
-            "fast": true
-        },
-        {
-            "name": "Military push-ups",
-            "fast": true
-        }
-    ],
+    "upper": {
+        "name": "Upper Body",
+        "exercises": [
+            {
+                "name": "Hydraulics",
+                "fast": false
+            },
+            {
+                "name": "Star push-ups",
+                "fast": true
+            },
+            {
+                "name": "Pike push-ups",
+                "fast": true
+            },
+            {
+                "name": "Push-ups",
+                "fast": true
+            },
+            {
+                "name": "Military push-ups",
+                "fast": true
+            }
+        ]
+    },
 
-    "lower": [
-        {
-            "name": "Box jumps",
-            "fast": true
-        },
-        {
-            "name": "Air squats",
-            "fast": true
-        },
-        {
-            "name": "Jump squats",
-            "fast": true
-        },
-        {
-            "name": "Prisoner squats",
-            "fast": true
-        },
-        {
-            "name": "Side lunges",
-            "fast": false
-        },
-        {
-            "name": "Lunges",
-            "fast": false
-        },
-        {
-            "name": "Bear squats",
-            "fast": true
-        },
-        {
-            "name": "Speed squats",
-            "fast": true
-        }
-    ],
+    "lower": {
+        "name": "Lower Body",
+        "exercises": [
+            {
+                "name": "Box jumps",
+                "fast": true
+            },
+            {
+                "name": "Air squats",
+                "fast": true
+            },
+            {
+                "name": "Jump squats",
+                "fast": true
+            },
+            {
+                "name": "Prisoner squats",
+                "fast": true
+            },
+            {
+                "name": "Side lunges",
+                "fast": false
+            },
+            {
+                "name": "Lunges",
+                "fast": false
+            },
+            {
+                "name": "Bear squats",
+                "fast": true
+            },
+            {
+                "name": "Speed squats",
+                "fast": true
+            }
+        ]
+    },
 
-    "core": [
-        {
-            "name": "Reverse crunches",
-            "fast": false
-        },
-        {
-            "name": "Bicycle crunches",
-            "fast": true
-        },
-        {
-            "name": "Scissor kicks",
-            "fast": true
-        },
-        {
-            "name": "Heel touches",
-            "fast": true
-        },
-        {
-            "name": "Toe touches",
-            "fast": true
-        },
-        {
-            "name": "Sit-ups",
-            "fast": true
-        },
-        {
-            "name": "Crunches",
-            "fast": true
-        },
-        {
-            "name": "Russian twists",
-            "fast": true
-        },
-        {
-            "name": "Mountain climbers",
-            "fast": true
-        }
-    ]
+    "core": {
+        "name": "Core",
+        "exercises": [
+            {
+                "name": "Reverse crunches",
+                "fast": false
+            },
+            {
+                "name": "Bicycle crunches",
+                "fast": true
+            },
+            {
+                "name": "Scissor kicks",
+                "fast": true
+            },
+            {
+                "name": "Heel touches",
+                "fast": true
+            },
+            {
+                "name": "Toe touches",
+                "fast": true
+            },
+            {
+                "name": "Sit-ups",
+                "fast": true
+            },
+            {
+                "name": "Crunches",
+                "fast": true
+            },
+            {
+                "name": "Russian twists",
+                "fast": true
+            },
+            {
+                "name": "Mountain climbers",
+                "fast": true
+            }
+        ]
+    }
 }

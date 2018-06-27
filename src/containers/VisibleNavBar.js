@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { undo, timerRestart } from '../actions';
+import { timerAwareUndo, undo, timerRestart } from '../actions';
 import NavBar from "../components/NavBar"
 
 
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    undoClick: () => dispatch(undo()),
+    undoClick: () => dispatch(timerAwareUndo()),
     timerRestart: () => dispatch(timerRestart())
 })
 

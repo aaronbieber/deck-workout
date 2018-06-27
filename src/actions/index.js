@@ -53,3 +53,43 @@ export const timerTick = () => {
         type: types.TIMER_TICK
     }
 }
+
+export const customizeSuit = (suit) => {
+    return {
+        type: types.CUSTOMIZE_SUIT,
+        suit
+    }
+}
+
+export const customizeSuitEnd = () => {
+    return {
+        type: types.CUSTOMIZE_SUIT_END
+    }
+}
+
+export const changeSuitExercise = (suit, exercise) => {
+    return {
+        type: types.CHANGE_SUIT_EXERCISE,
+        suit,
+        exercise
+    }
+}
+
+export const changeSuitExerciseAndEnd = (suit, exercise) => {
+    return dispatch => {
+        dispatch(changeSuitExercise(suit, exercise))
+        dispatch(customizeSuitEnd())
+    }
+}
+
+export const timerAwareUndo = () => {
+    return (dispatch, getState) => {
+        dispatch(undo())
+
+        if (getState().workout.draw.length === 0) {
+            dispatch(timerStop())
+        } else {
+            dispatch(timerRestart())
+        }
+    }
+}

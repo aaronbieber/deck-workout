@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import CardRow from './CardRow'
+import React, { Component } from "react"
+import VisibleCardRow from "../containers/VisibleCardRow"
 
 export default class Cards extends Component {
     render() {
@@ -8,7 +8,7 @@ export default class Cards extends Component {
               {Object.keys(this.props.exercises).map(suit => {
                   var e = this.props.exercises[suit];
                   var key = 'card-' + suit;
-                  return <CardRow key={ key } suit={ suit } exercise={ e }/>
+                  return <VisibleCardRow key={ key } suit={ suit } exercise={ e } edit={ this.props.edit } />
               })}
             </div>
         )
