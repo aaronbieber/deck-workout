@@ -45,6 +45,7 @@ html, body {
 
 .navbar-icon a {
     color: black;
+    display: none;
 }
 
 .navbar-icon i.unavailable {
@@ -53,6 +54,10 @@ html, body {
 
 .navbar-icon-right {
     text-align: right;
+}
+
+.navbar .help-link {
+    margin-right: 0.5em;
 }
 
 .cards {
@@ -147,6 +152,10 @@ html, body {
 
 .hide-link {
     display: none;
+}
+
+.navbar-icon a.show-link {
+    display: inline;
 }
 
 .form-radio {
