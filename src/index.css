@@ -165,3 +165,7 @@ html, body {
 #exercise-selector .form-label {
     font-weight: bold;
 }
+
+.padbox {
+    padding: 1em;
+}
