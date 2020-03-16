@@ -7,7 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/hello', function(req, res, next) {
-  res.json({"hello": "world"});
+  console.log('why hello')
+  req.app.locals.db.collection('users').find({})
+    .toArray((e, docs) => {
+      res.json(docs);
+    })
 })
 
 module.exports = router;

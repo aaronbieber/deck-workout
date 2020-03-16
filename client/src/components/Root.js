@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import VisibleDeckWorkout from '../containers/VisibleDeckWorkout'
@@ -6,7 +6,7 @@ import VisibleSettings from '../containers/VisibleSettings'
 import Help from '../components/Help'
 import 'whatwg-fetch'
 
-class Root extends React.Component {
+class Root extends Component {
   componentDidMount() {
     console.log('yes i have mounted');
     fetch('/hello').then((res) => res.json()).then((json) => console.log(json));

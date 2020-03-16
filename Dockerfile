@@ -1,12 +1,15 @@
 FROM node:8.11.1
 
 WORKDIR /opt/app
-COPY package.json package-lock.json* ./
-RUN npm cache clean --force && npm install
-
 COPY . /opt/app
+RUN npm cache clean --force && npm install
+RUN npm install react-scripts -g --silent
+RUN npm install nodemon -g --silent
 
-ENV PORT 80
-EXPOSE 80
+WORKDIR /opt/app/client
+RUN npm install
 
-CMD [ "npm", "run", "start" ]
+EXPOSE 3000
+
+WORKDIR /opt/app
+CMD [ "npm", "start" ]
