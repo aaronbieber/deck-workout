@@ -6,6 +6,7 @@ services:
       DEBUG: "deck-workout:*"
     ports:
       - "3000:3000"
+      - "3001:3001"
     volumes:
       - .:/opt/app
       - reserved:/opt/app/node_modules/

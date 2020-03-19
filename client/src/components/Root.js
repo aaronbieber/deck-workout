@@ -7,11 +7,6 @@ import Help from '../components/Help'
 import 'whatwg-fetch'
 
 class Root extends Component {
-  componentDidMount() {
-    console.log('yes i have mounted');
-    fetch('/hello').then((res) => res.json()).then((json) => console.log(json));
-  }
-
   render() {
     const {store} = this.props;
 

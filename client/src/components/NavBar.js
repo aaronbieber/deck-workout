@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import { timerAwareUndo, timerRestart } from '../actions';
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { GoogleLogin } from 'react-google-login'
 
 class NavBar extends Component {
   _undo = (e) => {
@@ -16,10 +15,6 @@ class NavBar extends Component {
 
   onMainPage = (match, location) => {
     return location.pathname === '/'
-  }
-
-  responseGoogle = (response) => {
-    console.log(response);
   }
 
   render() {
@@ -40,15 +35,6 @@ class NavBar extends Component {
           </NavLink>
 
           <i className={ undoClass } onClick={ this._undo }>undo</i>
-        </section>
-        <section className="navbar-section">
-          <GoogleLogin
-            clientId="244225836003-i7181j1lnj415hu6otglv26a6qv8tg6h.apps.googleusercontent.com"
-            buttonText="Login with Google"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
         </section>
         <section className="navbar-center">
           <h1>Wednesday Project</h1>

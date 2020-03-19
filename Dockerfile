@@ -10,6 +10,7 @@ WORKDIR /opt/app/client
 RUN npm install
 
 EXPOSE 3000
+EXPOSE 3001
 
 WORKDIR /opt/app
 CMD [ "npm", "start" ]

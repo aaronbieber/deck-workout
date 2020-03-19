@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -18,6 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['3nsDK#Nf309fDKfaln3kga0;sal3vn39GFQJ4'],
+  maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
