@@ -4,7 +4,7 @@ import './assets/spectre.min.css';
 import './index.css';
 import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
-import { generate } from './actions';
+import { generate, recoverSession } from './actions';
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -16,3 +16,4 @@ var store = createStore(reducer, applyMiddleware(thunk));
 render(<Root store={ store } />, document.getElementById('root'));
 registerServiceWorker();
 store.dispatch(generate());
+store.dispatch(recoverSession());

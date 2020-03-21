@@ -75,6 +75,13 @@ export const changeSuitExercise = (suit, exercise) => {
     }
 }
 
+export const error = (message) => {
+  return {
+    type: types.ERROR,
+    message
+  }
+}
+
 export const changeSuitExerciseAndEnd = (suit, exercise) => {
     return dispatch => {
         dispatch(changeSuitExercise(suit, exercise))
@@ -92,4 +99,40 @@ export const timerAwareUndo = () => {
             dispatch(timerRestart())
         }
     }
+}
+
+export const recoverSession = () => {
+  return (dispatch, getState) => {
+    fetch('/session')
+      .then((response) => {
+        if (response.ok) {
+          response.json().then(user => dispatch(setLogin(user)))
+        }
+      })
+  }
+}
+
+export const doLogin = (user) => {
+  return (dispatch, getState) => {
+    fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user: user
+      })
+    }).then((response) => {
+      if (response.ok) {
+        dispatch(setLogin(user))
+      } else {
+        dispatch(error('Failed'))
+      }
+    })
+  }
+}
+
+export const setLogin = (user) => {
+  return {
+    type: types.SET_LOGIN,
+    user
+  }
 }

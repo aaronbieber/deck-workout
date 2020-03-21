@@ -19,38 +19,16 @@ export default class Settings extends Component {
     this.props.generate();
   }
 
-  componentDidMount() {
-    fetch('/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user: {
-          name: 'Aaron Bieber',
-          email: 'aaron@aaronbieber.com',
-          googleId: '12345'
-        }
-      })
-    }).then(res => console.log(res))
-  }
-
   responseGoogle = (response) => {
-    console.log('heard from google');
-    console.log(response);
-
     if(!("profileObj" in response)) {
       console.log('Response from Google was incomplete or unsuccessful')
+      this.props.error('Bad response from Google')
       // TODO display something, I guess?
       // We should probably mutate the state at this point
       return
     }
 
-    fetch('/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user: response.profileObj
-      })
-    });
+    this.props.doLogin(response.profileObj)
   }
 
   render() {
@@ -88,6 +66,7 @@ export default class Settings extends Component {
             cookiePolicy={'single_host_origin'}
           />
         </div>
+        <div className="column col-11 col-mx-auto">{ this.props.user.name }</div>
       </div>
     )
 
