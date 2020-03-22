@@ -5,6 +5,7 @@ import './index.css';
 import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
 import { generate, recoverSession } from './actions';
+import { drawAll } from './actions';
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -17,3 +18,5 @@ render(<Root store={ store } />, document.getElementById('root'));
 registerServiceWorker();
 store.dispatch(generate());
 store.dispatch(recoverSession());
+
+store.dispatch(drawAll());

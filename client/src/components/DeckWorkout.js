@@ -4,6 +4,7 @@ import VisibleProgressBar from '../containers/VisibleProgressBar'
 import VisibleCardTable from '../containers/VisibleCardTable'
 import VisibleTimer from '../containers/VisibleTimer'
 import VisibleCards from '../containers/VisibleCards'
+import VisibleSummary from '../containers/VisibleSummary'
 
 export default class DeckWorkout extends Component {
     render() {
@@ -14,6 +15,7 @@ export default class DeckWorkout extends Component {
               <VisibleProgressBar />
               <VisibleTimer />
               <VisibleCardTable />
+              <VisibleSummary />
             </div>
         );
     }

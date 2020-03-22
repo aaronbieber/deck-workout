@@ -56,7 +56,7 @@ html, body {
     text-align: right;
 }
 
-.navbar .help-link {
+.navbar .link-pad {
     margin-right: 0.5em;
 }
 
@@ -93,7 +93,7 @@ html, body {
 }
 
 .drawn-cards .card-done img {
-    width: 70%;
+    width: 30%;
     margin-left: 0;
 }
 
@@ -168,4 +168,22 @@ html, body {
 
 .padbox {
     padding: 1em;
+}
+
+.summary-wrap {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.summary-wrap h3 {
+  margin: 0.5em 0 0.5em 0;
+  border-bottom: 1px solid black;
+  font-size: 1.3em;
+}
+
+.summary-wrap span.suit {
+  font-size: 1.5em;
+  line-height: 1.2em;
+  display: inline-block;
+  width: 1.5em;
 }

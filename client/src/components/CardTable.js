@@ -38,7 +38,6 @@ export default class CardTable extends Component {
     cardImageTag = (src, className) => {
         return (
             <img onClick={ this._drawClick }
-                 onTouchEnd={ this._drawClick }
                  className={ className }
                  key={ src }
                  src={ src }

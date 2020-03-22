@@ -29,8 +29,7 @@ class NavBar extends Component {
           <NavLink
             to="/"
             isActive={ this.onInnerPage }
-            activeClassName="show-link"
-          >
+            activeClassName="show-link">
             <i className="material-icons">arrow_back</i>
           </NavLink>
 
@@ -42,17 +41,25 @@ class NavBar extends Component {
         <section className="navbar-section navbar-icon navbar-icon-right">
           <NavLink
             to="/help"
-            className="help-link"
+            className="link-pad"
             isActive={ this.onMainPage }
             activeClassName="show-link">
-            <i className="material-icons help-icon">help</i>
+            <i className="material-icons">help</i>
           </NavLink>
 
           <NavLink
             to="/settings"
+            className="link-pad"
             isActive={ this.onMainPage }
             activeClassName="show-link">
             <i className="material-icons">settings</i>
+          </NavLink>
+
+          <NavLink
+            to="/profile"
+            isActive={ this.onMainPage }
+            activeClassName="show-link">
+            <i className="material-icons">account_circle</i>
           </NavLink>
         </section>
       </header>

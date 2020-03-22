@@ -1,0 +1,18 @@
+{
+  "hearts": {
+    "symbol": "♥",
+    "color": "red"
+  },
+  "diamonds": {
+    "symbol": "♦",
+    "color": "red"
+  },
+  "clubs": {
+    "symbol": "♣",
+    "color": "black"
+  },
+  "spades": {
+    "symbol": "♠",
+    "color": "black"
+  }
+}

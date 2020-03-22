@@ -12,6 +12,13 @@ export const draw = () => {
     };
 }
 
+// FOR DEBUGGING ONLY
+export const drawAll = () => {
+  return {
+    type: 'DRAW_ALL'
+  }
+}
+
 export const undo = () => {
     return {
         type: types.UNDO

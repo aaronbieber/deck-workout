@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import suitSymbols from '../data/suitSymbols'
 
 export default class CardRow extends Component {
     _edit = (e) => {
@@ -7,25 +8,6 @@ export default class CardRow extends Component {
     }
 
     render() {
-        var suitSymbols = {
-            "hearts": {
-                "symbol": "♥",
-                "color": "red"
-            },
-            "diamonds": {
-                "symbol": "♦",
-                "color": "red"
-            },
-            "clubs": {
-                "symbol": "♣",
-                "color": "black"
-            },
-            "spades": {
-                "symbol": "♠",
-                "color": "black"
-            }
-        };
-
         var suitSymbol = suitSymbols[this.props.suit]["symbol"];
         var suitColor  = suitSymbols[this.props.suit]["color"];
         var suitClass  = "suit-" + suitColor;
