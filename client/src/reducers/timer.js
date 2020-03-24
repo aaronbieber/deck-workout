@@ -1,4 +1,5 @@
 import * as types from '../actions/actionTypes';
+import { cloneObject } from '../utils'
 
 const initialState = {
     start: null,
@@ -48,6 +49,15 @@ const now = () => {
     return Math.floor(new Date().getTime() / 1000)
 }
 
+const hydrateTimer = (state, workout) => {
+  var newState = cloneObject(state)
+
+  console.log(workout)
+
+  newState.time = workout.time.map(t => t.toString().padStart(2, '0'))
+  return newState
+}
+
 export default function timer(state = initialState, action) {
     switch (action.type) {
 
@@ -92,6 +102,9 @@ export default function timer(state = initialState, action) {
             })
         }
         return state
+
+    case types.HYDRATE:
+      return hydrateTimer(state, action.workout)
 
     default:
         return state

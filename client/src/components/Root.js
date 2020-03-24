@@ -16,6 +16,7 @@ class Root extends Component {
         <Router>
           <div>
             <Route exact path="/" component={VisibleDeckWorkout} />
+            <Route exact path="/w/:workoutId" component={VisibleDeckWorkout} />
             <Route path="/settings" component={VisibleSettings} />
             <Route path="/help" component={Help} />
             <Route path="/profile" component={VisibleProfile} />

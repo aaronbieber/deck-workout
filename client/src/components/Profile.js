@@ -5,7 +5,7 @@ export default class Profile extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar noUndo={ true } />
         This is your empty profile page.
       </div>
     )

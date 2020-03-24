@@ -9,12 +9,15 @@ class NavBar extends Component {
     this.props.undoClick()
   }
 
-  onInnerPage = (match, location) => {
-    return location.pathname !== '/'
+  showBackArrow = (match, location) => {
+    if (location.pathname === '/' || location.pathname.match(new RegExp('/w/'))) {
+      return false
+    }
+    return true
   }
 
-  onMainPage = (match, location) => {
-    return location.pathname === '/'
+  showNavIcons = (match, location) => {
+    return !this.showBackArrow(match, location)
   }
 
   render() {
@@ -23,12 +26,14 @@ class NavBar extends Component {
       undoClass += ' unavailable'
     }
 
+    var showBackArrowClass = this.showBackArrow ? ' show-link' : ''
+
     return (
       <header className="navbar">
         <section className="navbar-section navbar-icon">
           <NavLink
             to="/"
-            isActive={ this.onInnerPage }
+            isActive={ this.showBackArrow }
             activeClassName="show-link">
             <i className="material-icons">arrow_back</i>
           </NavLink>
@@ -42,7 +47,7 @@ class NavBar extends Component {
           <NavLink
             to="/help"
             className="link-pad"
-            isActive={ this.onMainPage }
+            isActive={ this.showNavIcons }
             activeClassName="show-link">
             <i className="material-icons">help</i>
           </NavLink>
@@ -50,14 +55,14 @@ class NavBar extends Component {
           <NavLink
             to="/settings"
             className="link-pad"
-            isActive={ this.onMainPage }
+            isActive={ this.showNavIcons }
             activeClassName="show-link">
             <i className="material-icons">settings</i>
           </NavLink>
 
           <NavLink
             to="/profile"
-            isActive={ this.onMainPage }
+            isActive={ this.showNavIcons }
             activeClassName="show-link">
             <i className="material-icons">account_circle</i>
           </NavLink>

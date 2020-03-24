@@ -3,7 +3,7 @@ import { cloneObject } from '../utils'
 
 const initialState = {
   customizingSuit: null,
-  user: {}
+  user: false
 }
 
 const customizeSuit = (state, suit) => {

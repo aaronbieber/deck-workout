@@ -10,6 +10,10 @@ export const DRAW = 'DRAW'
 export const TOGGLE_DRAW_THREE = 'TOGGLE_DRAW_THREE'
 export const UNDO = 'UNDO'
 export const CHANGE_SUIT_EXERCISE = 'CHANGE_SUIT_EXERCISE'
+export const SAVE = 'SAVE'
+export const SAVED = 'SAVED'
+export const LOAD = 'LOAD'
+export const HYDRATE = 'HYDRATE'
 
 // timer
 export const TIMER_START = 'TIMER_START'

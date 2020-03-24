@@ -16,6 +16,7 @@ const initialState = {
   draw: [],
   discard: [],
   done: false,
+  saved: false,
   stats: {
     runs: {
       hearts: 0,
@@ -63,11 +64,11 @@ const spliceExercise = exercises => {
   return exercises.splice(Math.floor(Math.random() * exercises.length), 1)[0];
 }
 
-const longestRuns = (exercises, deck) => {
+const longestRuns = (deck) => {
   if (deck.length < 1) return {}
 
   var runs = {}
-  var suits = Object.keys(exercises)
+  var suits = ['hearts', 'diamonds', 'clubs', 'spades']
   for (let i=0; i<suits.length; i++) {
     var suit = suits[i]
     runs[suit] = [0]
@@ -108,6 +109,13 @@ const jokerValues = (deck) => {
   return jokers
 }
 
+const getStats = (deck) => {
+  return {
+    runs: longestRuns(deck),
+    jokers: jokerValues(deck)
+  }
+}
+
 const generate = (state) => {
   var groups = Object.keys(data);
   var randGroup = groups[Math.floor(Math.random() * groups.length)];
@@ -145,10 +153,7 @@ const generate = (state) => {
     drawIndex: null,
     discardIndex: null,
     discard: [],
-    stats: {
-      runs: longestRuns(state.exercises, shuffledDeck),
-      jokers: jokerValues(shuffledDeck)
-    }
+    stats: getStats(shuffledDeck)
   });
 }
 
@@ -217,6 +222,31 @@ const setSuitExercise = (state, suit, exercise) => {
   return newState
 }
 
+const saved = (state, id) => {
+  var newState = cloneObject(state)
+  newState["saved"] = id
+
+  console.log('persisted ID into current workout')
+  console.log(newState)
+  return newState
+}
+
+const hydrateWorkout = (state, workout) => {
+  console.log('hydrating workout')
+  var newState = cloneObject(state)
+
+  newState.deck = workout.deck
+  newState.exercises = workout.exercises
+  newState.saved = workout._id
+
+  newState.drawIndex = 0
+  newState.done = true
+  newState = buildCardPiles(newState)
+  newState.stats = getStats(newState.deck)
+
+  return newState
+}
+
 export default function workout(state = initialState, action) {
   switch (action.type) {
   case types.GENERATE:
@@ -236,6 +266,12 @@ export default function workout(state = initialState, action) {
 
   case 'DRAW_ALL':
     return drawAll(state)
+
+  case 'SAVED':
+    return saved(state, action.id)
+
+  case 'HYDRATE':
+    return hydrateWorkout(state, action.workout)
 
   default:
     return state;

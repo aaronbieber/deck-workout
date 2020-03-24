@@ -119,14 +119,21 @@ export const recoverSession = () => {
   }
 }
 
+const userFromGoogleUser = (googleUser) => {
+  return {
+    id: googleUser.googleId,
+    email: googleUser.email
+  }
+}
+
 export const doLogin = (user) => {
   return (dispatch, getState) => {
+    console.log('sending login data')
+    console.log(userFromGoogleUser(user))
     fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user: user
-      })
+      body: JSON.stringify(userFromGoogleUser(user))
     }).then((response) => {
       if (response.ok) {
         dispatch(setLogin(user))
@@ -141,5 +148,61 @@ export const setLogin = (user) => {
   return {
     type: types.SET_LOGIN,
     user
+  }
+}
+
+const saveableWorkout = (state) => {
+  return {
+    deck: state.workout.deck,
+    exercises: state.workout.exercises,
+    time: state.timer.time
+  }
+}
+
+export const save = () => {
+  return (dispatch, getState) => {
+    fetch('/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(saveableWorkout(getState()))
+    }).then(response => {
+      if (response.ok) {
+        console.log('save returned ok')
+        response.json().then(workout => {
+          console.log(workout)
+          dispatch(saved(workout._id.toString()))
+        })
+      }
+    })
+  }
+}
+
+export const saved = (id) => {
+  return {
+    type: types.SAVED,
+    id
+  }
+}
+
+export const load = (id) => {
+  console.log('i will load now')
+  return (dispatch, getState) => {
+    fetch('/load/'+id, {
+    }).then(response => {
+      if (response.ok) {
+        console.log('load returned ok')
+        response.json().then(workout => {
+          console.log(workout)
+          dispatch(hydrate(workout))
+        })
+      }
+    })
+  }
+}
+
+export const hydrate = (workout) => {
+  return {
+    type: types.HYDRATE,
+    workout
   }
 }
