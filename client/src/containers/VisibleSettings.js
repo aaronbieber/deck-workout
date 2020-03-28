@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { timerStop, timerReset, generate, doLogin, error } from "../actions"
+import { timerStop, timerReset, generate } from '../actions'
 import Settings from '../components/Settings.js'
 
 const mapStateToProps = state => ({
@@ -12,9 +12,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   timerStop: () => dispatch(timerStop()),
   timerReset: () => dispatch(timerReset()),
-  generate: () => dispatch(generate()),
-  doLogin: (user) => dispatch(doLogin(user)),
-  error: (message) => dispatch(error(message))
+  generate: () => dispatch(generate())
 });
 
 const VisibleSettings = connect(

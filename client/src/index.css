@@ -187,3 +187,43 @@ html, body {
   display: inline-block;
   width: 1.5em;
 }
+
+.hide-login-button {
+  display: none !important;
+}
+
+.login-column {
+  text-align: center;
+  padding: 15px;
+}
+
+.workout-row {
+  display: table;
+  clear: both;
+  border-bottom: 1px solid silver;
+}
+
+.workout-row-created {
+  font-size: 1.2em;
+}
+
+.workout-cell {
+  display: table-cell;
+}
+
+.workout-cell-expand {
+  width: 100%;
+}
+
+.workout-row-time {
+  display: table-cell;
+  font-size: 2em;
+}
+
+.workout-row-exercises div {
+
+}
+
+.workout-row-exercises div span {
+
+}

@@ -3,7 +3,6 @@ import NavBar from './NavBar'
 import VisibleCards from '../containers/VisibleCards'
 import VisibleSwitch from '../containers/VisibleSwitch';
 import VisibleExerciseSelector from "../containers/VisibleExerciseSelector"
-import { GoogleLogin } from 'react-google-login'
 
 export default class Settings extends Component {
   _generate = (e) => {
@@ -17,18 +16,6 @@ export default class Settings extends Component {
     this.props.timerStop();
     this.props.timerReset();
     this.props.generate();
-  }
-
-  responseGoogle = (response) => {
-    if(!("profileObj" in response)) {
-      console.log('Response from Google was incomplete or unsuccessful')
-      this.props.error('Bad response from Google')
-      // TODO display something, I guess?
-      // We should probably mutate the state at this point
-      return
-    }
-
-    this.props.doLogin(response.profileObj)
   }
 
   render() {
@@ -57,16 +44,6 @@ export default class Settings extends Component {
             </div>
           </form>
         </div>
-        <div className="column col-11 col-mx-auto" style={{ textAlign: 'center', padding: '10px' }}>
-          <GoogleLogin
-            clientId="244225836003-i7181j1lnj415hu6otglv26a6qv8tg6h.apps.googleusercontent.com"
-            buttonText="Login with Google"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
-        </div>
-        <div className="column col-11 col-mx-auto">{ this.props.user.name }</div>
       </div>
     )
 

@@ -1,18 +1,11 @@
 import * as types from '../actions/actionTypes';
-import { cloneObject } from '../utils'
+import { cloneObject, pad } from '../utils'
 
 const initialState = {
     start: null,
     running: false,
     time: ['00', '00', '00'],
     inc: 0
-}
-
-const pad = (n, z) => {
-    var width = 2
-    z = z || '0';
-    n = n + '';
-    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
 const computeTime = (start, now) => {

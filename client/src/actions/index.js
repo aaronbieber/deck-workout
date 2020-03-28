@@ -187,16 +187,31 @@ export const saved = (id) => {
 export const load = (id) => {
   console.log('i will load now')
   return (dispatch, getState) => {
-    fetch('/load/'+id, {
-    }).then(response => {
-      if (response.ok) {
-        console.log('load returned ok')
-        response.json().then(workout => {
-          console.log(workout)
-          dispatch(hydrate(workout))
-        })
-      }
-    })
+    fetch('/load/'+id)
+      .then(response => {
+        if (response.ok) {
+          console.log('load returned ok')
+          response.json().then(workout => {
+            console.log(workout)
+            dispatch(hydrate(workout))
+          })
+        }
+      })
+  }
+}
+
+export const loadWorkouts = () => {
+  return dispatch => {
+    fetch('/workouts')
+      .then(response => {
+        if (response.ok) {
+          console.log('loaded workouts')
+          response.json().then(workouts => {
+            console.log(workouts)
+            dispatch(hydrateWorkouts(workouts))
+          })
+        }
+      })
   }
 }
 
@@ -204,5 +219,12 @@ export const hydrate = (workout) => {
   return {
     type: types.HYDRATE,
     workout
+  }
+}
+
+export const hydrateWorkouts = (workouts) => {
+  return {
+    type: types.HYDRATE_WORKOUTS,
+    workouts
   }
 }

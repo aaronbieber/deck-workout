@@ -66,6 +66,21 @@ router.post('/save', function(req, res, next) {
     })
 })
 
+router.get('/workouts', function(req, res, next) {
+  if (!('user' in req.session) || !verifyUser(req.session.user)) {
+    res.status(401)
+    res.end('You must be logged in')
+  }
+
+  Workout.find({ userId: req.session.user.id })
+    .select('created time exercises')
+    .sort('-created')
+    .then(workouts => {
+      console.log(workouts)
+      res.json(workouts)
+    })
+})
+
 router.get('/load/:workoutId', function(req, res, next) {
   Workout.findOne({ _id: req.params.workoutId })
     .then(workout => {

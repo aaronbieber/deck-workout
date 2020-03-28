@@ -3,6 +3,8 @@ export const CUSTOMIZE_SUIT = 'CUSTOMIZE_SUIT'
 export const CUSTOMIZE_SUIT_END = 'CUSTOMIZE_SUIT_END'
 export const SET_LOGIN = 'SET_LOGIN'
 export const ERROR = 'ERROR'
+export const LOAD_WORKOUTS = 'LOAD_WORKOUTS'
+export const HYDRATE_WORKOUTS = 'HYDRATE_WORKOUTS'
 
 // workout
 export const GENERATE = 'GENERATE'
