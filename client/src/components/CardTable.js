@@ -4,8 +4,8 @@ import VisibleDoneCard from '../containers/VisibleDoneCard'
 import debounce from 'lodash/debounce'
 
 export default class CardTable extends Component {
-    cardFile = (suit, num) => {
 
+    cardFile = (suit, num) => {
         if (this.props.draw.length === 0) {
             return '/cards/2x/back-navy.png';
         }

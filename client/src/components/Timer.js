@@ -20,7 +20,7 @@ export default class Timer extends Component {
         if (this.props.running) {
             return (
                 <div className="timer">
-                  <span>{ time[0] }</span>:<span>{ time[1] }</span>:<span>{ time[2] }</span>
+                  <span>{ time[1] }</span>:<span>{ time[2] }</span>
                 </div>
             )
         }

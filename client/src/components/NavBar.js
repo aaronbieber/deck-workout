@@ -26,8 +26,6 @@ class NavBar extends Component {
       undoClass += ' unavailable'
     }
 
-    var showBackArrowClass = this.showBackArrow ? ' show-link' : ''
-
     return (
       <header className="navbar">
         <section className="navbar-section navbar-icon">

@@ -52,6 +52,15 @@ class Help extends Component {
                   choose whether to draw one or three cards each time,
                   and customize the exercises manually if you wish.
                 </p>
+
+                <h3>Support Me</h3>
+
+                <p>
+                  If you like this, and you want to help me out, you
+                  can <a target="_blank" href="https://www.buymeacoffee.com/RtfSZBm">buy me a
+                  coffee</a>, or you can <a target="_blank" href="https://github.com/aaronbieber/deck-workout">
+                  contribute to the project</a>.
+                </p>
               </div>
             </div>
         )

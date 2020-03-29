@@ -228,3 +228,10 @@ export const hydrateWorkouts = (workouts) => {
     workouts
   }
 }
+
+export const repeatWorkout = (workout) => {
+  return {
+    type: types.REPEAT,
+    workout
+  }
+}

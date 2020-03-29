@@ -160,11 +160,11 @@ const generate = (state) => {
 const buildCardPiles = (state) => {
   if (state["drawIndex"] !== null) {
     if (state["drawIndex"] === 0) {
-      state["draw"] = state["deck"].slice(0,1)
+      state["draw"] = state["deck"].slice(0,1).reverse()
       state["discard"] = state["deck"].slice(1)
     } else {
       state["draw"] = state["deck"].slice(state["drawIndex"],
-                                          state["drawIndex"] + state["drawCount"])
+                                          state["drawIndex"] + state["drawCount"]).reverse()
       state["discard"] = state["deck"].slice(state["drawIndex"] + state["drawCount"])
     }
   } else {
@@ -247,6 +247,19 @@ const hydrateWorkout = (state, workout) => {
   return newState
 }
 
+const repeatWorkout = (state, workout) => {
+  console.log('repeating stored workout')
+  return Object.assign({}, state, {
+    exercises: workout.exercises,
+    deck: workout.deck,
+    draw: [],
+    drawIndex: null,
+    discardIndex: null,
+    discard: [],
+    stats: getStats(state.deck)
+  });
+}
+
 export default function workout(state = initialState, action) {
   switch (action.type) {
   case types.GENERATE:
@@ -267,11 +280,14 @@ export default function workout(state = initialState, action) {
   case 'DRAW_ALL':
     return drawAll(state)
 
-  case 'SAVED':
+  case types.SAVED:
     return saved(state, action.id)
 
-  case 'HYDRATE':
+  case types.HYDRATE:
     return hydrateWorkout(state, action.workout)
+
+  case types.REPEAT:
+    return repeatWorkout(state, action.workout)
 
   default:
     return state;

@@ -5,7 +5,7 @@ import './index.css';
 import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
 import { generate, recoverSession } from './actions';
-import { drawAll } from './actions';
+//import { drawAll } from './actions';
 import observer from './utils/observer';
 import { handleSave } from './observers';
 

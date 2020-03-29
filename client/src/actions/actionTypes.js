@@ -16,6 +16,7 @@ export const SAVE = 'SAVE'
 export const SAVED = 'SAVED'
 export const LOAD = 'LOAD'
 export const HYDRATE = 'HYDRATE'
+export const REPEAT = 'REPEAT'
 
 // timer
 export const TIMER_START = 'TIMER_START'

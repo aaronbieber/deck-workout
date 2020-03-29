@@ -73,7 +73,6 @@ router.get('/workouts', function(req, res, next) {
   }
 
   Workout.find({ userId: req.session.user.id })
-    .select('created time exercises')
     .sort('-created')
     .then(workouts => {
       console.log(workouts)
