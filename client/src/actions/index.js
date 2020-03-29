@@ -229,9 +229,29 @@ export const hydrateWorkouts = (workouts) => {
   }
 }
 
-export const repeatWorkout = (workout) => {
+export const hydrateAttribution = (attribution) => {
   return {
-    type: types.REPEAT,
-    workout
+    type: types.HYDRATE_ATTRIBUTION,
+    attribution
+  }
+}
+
+export const repeatWorkout = (workout) => {
+  return dispatch => {
+    // todo: create proper actions
+    // probably want to think about difference between
+    // "load" and "hydrate" for workouts also
+    dispatch({ type: types.REPEAT, workout })
+
+    fetch('/attribute/' + workout._id)
+      .then(response => {
+        if (response.ok) {
+          console.log('loaded workout attribution')
+          response.json().then(attribution => {
+            console.log(attribution)
+            dispatch(hydrateAttribution(attribution))
+          })
+        }
+      })
   }
 }

@@ -188,6 +188,14 @@ html, body {
   width: 1.5em;
 }
 
+.summary-wrap .summary-attribution {
+  margin-top: 10px;
+}
+
+.summary-wrap .summary-actions {
+
+}
+
 .hide-login-button {
   display: none !important;
 }
@@ -241,13 +249,13 @@ html, body {
   padding-top: 15px;
 }
 
-.workout-row-actions button {
+.workout-row-actions button i {
+  font-size: 1em;
+}
+
+.button-link {
   background-color: transparent;
   border: 1px solid silver;
   padding: 8px;
   margin-right: 15px;
-}
-
-.workout-row-actions button i {
-  font-size: 1em;
 }

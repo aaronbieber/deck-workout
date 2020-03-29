@@ -5,7 +5,7 @@ import VisibleProgressBar from '../containers/VisibleProgressBar'
 import VisibleCardTable from '../containers/VisibleCardTable'
 import VisibleTimer from '../containers/VisibleTimer'
 import VisibleCards from '../containers/VisibleCards'
-import VisibleSummary from '../containers/VisibleSummary'
+import Summary from '../components/Summary'
 
 export default class DeckWorkout extends Component {
   componentDidMount = () => {
@@ -29,7 +29,7 @@ export default class DeckWorkout extends Component {
         <VisibleProgressBar />
         <VisibleTimer />
         <VisibleCardTable />
-        <VisibleSummary />
+        <Summary />
       </div>
     );
   }

@@ -43,8 +43,8 @@ class WorkoutRow extends Component {
         </div>
 
         <div className="workout-row-actions">
-          <button onClick={this._share}><i className="material-icons">share</i> Share</button>
-          <button onClick={this._repeat}><i className="material-icons">replay</i> Repeat</button>
+          <button className="button-link" onClick={this._share}><i className="material-icons">share</i> Share</button>
+          <button className="button-link" onClick={this._repeat}><i className="material-icons">replay</i> Repeat</button>
         </div>
       </div>
     )

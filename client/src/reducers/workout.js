@@ -17,6 +17,8 @@ const initialState = {
   discard: [],
   done: false,
   saved: false,
+  from: null,
+  by: null,
   stats: {
     runs: {
       hearts: 0,
@@ -238,7 +240,12 @@ const hydrateWorkout = (state, workout) => {
   newState.deck = workout.deck
   newState.exercises = workout.exercises
   newState.saved = workout._id
-
+  newState.by = workout.by
+  newState.from = {
+    id: workout._id,
+    time: workout.time,
+    created: workout.created
+  }
   newState.drawIndex = 0
   newState.done = true
   newState = buildCardPiles(newState)
@@ -250,6 +257,10 @@ const hydrateWorkout = (state, workout) => {
 const repeatWorkout = (state, workout) => {
   console.log('repeating stored workout')
   return Object.assign({}, state, {
+    from: {
+      id: workout._id,
+      time: workout.time
+    },
     exercises: workout.exercises,
     deck: workout.deck,
     draw: [],
@@ -258,6 +269,12 @@ const repeatWorkout = (state, workout) => {
     discard: [],
     stats: getStats(state.deck)
   });
+}
+
+const hydrateAttribution = (state, attribution) => {
+  var newState = cloneObject(state)
+  newState.from = attribution
+  return newState
 }
 
 export default function workout(state = initialState, action) {
@@ -288,6 +305,9 @@ export default function workout(state = initialState, action) {
 
   case types.REPEAT:
     return repeatWorkout(state, action.workout)
+
+  case types.HYDRATE_ATTRIBUTION:
+    return hydrateAttribution(state, action.attribution)
 
   default:
     return state;

@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 router.get('/session', function(req, res, next) {
   console.log(req.session)
   if ('user' in req.session && 'id' in req.session.user) {
-    getOrCreateUser(req.session.user)
+    verifyUser(req.session.user)
       .then((user => res.json(stripIdFromUser(user))))
   } else {
     res.status(404)
@@ -84,12 +84,40 @@ router.get('/load/:workoutId', function(req, res, next) {
   Workout.findOne({ _id: req.params.workoutId })
     .then(workout => {
       console.log(workout)
-      res.json(workout)
+
+      User.findOne({ googleId: workout.userId })
+        .then(user => {
+          console.log(user.toObject())
+
+          res.json(Object.assign(workout.toObject(), {
+            by: stripIdFromUser(user.toObject())
+          }))
+        })
+
+      //res.json(workout)
+    })
+})
+
+router.get('/attribute/:workoutId', function(req, res, next) {
+  Workout.findOne({ _id: req.params.workoutId })
+    .then(workout => {
+      console.log(workout)
+      console.log('retrieve user by id ' + workout.userId)
+      User.findOne({ googleId: workout.userId })
+        .then(user => {
+          console.log(user)
+          res.json({
+            user: stripIdFromUser(user),
+            created: workout.created,
+            time: workout.time
+          })
+        })
     })
 })
 
 function stripIdFromUser(user) {
   return {
+    id: user.googleId,
     name: user.name,
     email: user.email
   }
@@ -121,7 +149,8 @@ async function getOrCreateUser(user) {
 }
 
 async function verifyUser(user) {
-  var foundUser = await User.findOne({ googleId: user.id })
+  return await User.findOne({ googleId: user.id })
+    .catch(err => console.log(err))
 }
 
 module.exports = router;

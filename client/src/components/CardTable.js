@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { cloneObject } from '../utils'
-import VisibleDoneCard from '../containers/VisibleDoneCard'
+import DoneCard from '../components/DoneCard'
 import debounce from 'lodash/debounce'
 
 export default class CardTable extends Component {
@@ -64,7 +64,7 @@ export default class CardTable extends Component {
 
         for (var i=0; i<cards.length; i++) {
             if (cards[i][0] === "done") {
-                images.push(<VisibleDoneCard key="card-done" />)
+                images.push(<DoneCard key="card-done" />)
             } else {
                 suit = cards[i][0]
                 num = cards[i][1]
