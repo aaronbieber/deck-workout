@@ -155,12 +155,16 @@ const saveableWorkout = (state) => {
   return {
     deck: state.workout.deck,
     exercises: state.workout.exercises,
-    time: state.timer.time
+    time: state.timer.time,
+    from: state.workout.from
   }
 }
 
 export const save = () => {
   return (dispatch, getState) => {
+    console.log('dispatching save')
+    console.log(saveableWorkout(getState()))
+
     fetch('/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -237,21 +241,21 @@ export const hydrateAttribution = (attribution) => {
 }
 
 export const repeatWorkout = (workout) => {
-  return dispatch => {
+  return (dispatch, getState) => {
     // todo: create proper actions
     // probably want to think about difference between
     // "load" and "hydrate" for workouts also
     dispatch({ type: types.REPEAT, workout })
 
-    fetch('/attribute/' + workout._id)
-      .then(response => {
-        if (response.ok) {
-          console.log('loaded workout attribution')
-          response.json().then(attribution => {
-            console.log(attribution)
-            dispatch(hydrateAttribution(attribution))
-          })
-        }
-      })
+    // fetch('/attribute/' + workout._id)
+    //   .then(response => {
+    //     if (response.ok) {
+    //       console.log('loaded workout attribution')
+    //       response.json().then(attribution => {
+    //         console.log(attribution)
+    //         dispatch(hydrateAttribution(attribution))
+    //       })
+    //     }
+    //   })
   }
 }

@@ -46,14 +46,17 @@ router.post('/save', function(req, res, next) {
   }
 
   console.log('i will save now')
-  console.log(workout)
 
   var workout = new Workout({
     userId: req.session.user.id,
     deck: req.body.deck,
     exercises: req.body.exercises,
-    time: req.body.time
+    time: req.body.time,
+    from: req.body.from
   })
+
+  console.log(workout)
+
   workout.save()
     .then(resp => {
       console.log(resp)

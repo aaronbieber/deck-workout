@@ -57,8 +57,8 @@ class Help extends Component {
 
                 <p>
                   If you like this, and you want to help me out, you
-                  can <a target="_blank" href="https://www.buymeacoffee.com/RtfSZBm">buy me a
-                  coffee</a>, or you can <a target="_blank" href="https://github.com/aaronbieber/deck-workout">
+                  can <a target="_blank" rel="noopener noreferrer" href="https://www.buymeacoffee.com/RtfSZBm">buy me a
+                  coffee</a>, or you can <a target="_blank" rel="noopener noreferrer" href="https://github.com/aaronbieber/deck-workout">
                   contribute to the project</a>.
                 </p>
               </div>

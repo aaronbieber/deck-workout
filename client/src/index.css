@@ -190,6 +190,10 @@ html, body {
 
 .summary-wrap .summary-attribution {
   margin-top: 10px;
+  padding: 8px;
+  background-color: #D7FEBD;
+  border-radius: 5px;
+  color: black;
 }
 
 .summary-wrap .summary-actions {

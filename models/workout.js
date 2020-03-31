@@ -10,7 +10,14 @@ var WorkoutSchema = new mongoose.Schema({
     clubs: String,
     spades: String
   },
-  time: [Number]
+  time: [Number],
+  from: {
+    id: String,
+    time: [Number],
+    created: { type: Date },
+    name: String,
+    email: String
+  }
 })
 
 module.exports = mongoose.model('Workout', WorkoutSchema)

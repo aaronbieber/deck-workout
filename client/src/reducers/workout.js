@@ -241,34 +241,42 @@ const hydrateWorkout = (state, workout) => {
   newState.exercises = workout.exercises
   newState.saved = workout._id
   newState.by = workout.by
-  newState.from = {
-    id: workout._id,
-    time: workout.time,
-    created: workout.created
+
+  if ('id' in workout.from) {
+    newState.from = workout.from
+  } else {
+    newState.from = {
+      id: workout._id,
+      time: workout.time,
+      created: workout.created,
+      name: workout.by.name,
+      email: workout.by.email
+    }
   }
+
   newState.drawIndex = 0
   newState.done = true
   newState = buildCardPiles(newState)
   newState.stats = getStats(newState.deck)
+
+  console.log(newState)
 
   return newState
 }
 
 const repeatWorkout = (state, workout) => {
   console.log('repeating stored workout')
-  return Object.assign({}, state, {
-    from: {
-      id: workout._id,
-      time: workout.time
-    },
-    exercises: workout.exercises,
-    deck: workout.deck,
+  var newWorkout = Object.assign({}, workout, {
+    done: false,
     draw: [],
     drawIndex: null,
     discardIndex: null,
     discard: [],
+    saved: false,
     stats: getStats(state.deck)
   });
+  console.log(newWorkout)
+  return newWorkout
 }
 
 const hydrateAttribution = (state, attribution) => {
