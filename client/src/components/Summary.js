@@ -99,7 +99,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  repeatWorkout: (workout) => dispatch(repeatWorkout(workout))
+  repeatWorkout: () => dispatch(repeatWorkout())
 })
 
 export default withRouter(connect(

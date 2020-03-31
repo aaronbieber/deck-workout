@@ -3,6 +3,8 @@ import data from '../data/exercises'
 import { cloneObject } from '../utils'
 
 const initialState = {
+  id: null,
+  created: null,
   drawCount: 3,
   exercises: {
     hearts: '...',
@@ -17,7 +19,7 @@ const initialState = {
   discard: [],
   done: false,
   saved: false,
-  from: null,
+  from: false,
   by: null,
   stats: {
     runs: {
@@ -226,6 +228,7 @@ const setSuitExercise = (state, suit, exercise) => {
 
 const saved = (state, id) => {
   var newState = cloneObject(state)
+  newState["id"] = id
   newState["saved"] = id
 
   console.log('persisted ID into current workout')
@@ -237,21 +240,15 @@ const hydrateWorkout = (state, workout) => {
   console.log('hydrating workout')
   var newState = cloneObject(state)
 
+  newState.id = workout._id
+  newState.created = workout.created
   newState.deck = workout.deck
   newState.exercises = workout.exercises
   newState.saved = workout._id
   newState.by = workout.by
 
-  if ('id' in workout.from) {
+  if (workout.from) {
     newState.from = workout.from
-  } else {
-    newState.from = {
-      id: workout._id,
-      time: workout.time,
-      created: workout.created,
-      name: workout.by.name,
-      email: workout.by.email
-    }
   }
 
   newState.drawIndex = 0
@@ -264,24 +261,31 @@ const hydrateWorkout = (state, workout) => {
   return newState
 }
 
-const repeatWorkout = (state, workout) => {
+const repeatWorkout = (state, timer) => {
+  var newState = cloneObject(state)
+
   console.log('repeating stored workout')
-  var newWorkout = Object.assign({}, workout, {
+  console.log(state)
+
+  Object.assign(newState, {
+    id: null,
+    created: null,
     done: false,
     draw: [],
     drawIndex: null,
     discardIndex: null,
     discard: [],
     saved: false,
-    stats: getStats(state.deck)
+    from: {
+      id: state.id,
+      created: state.created,
+      name: state.by.name,
+      email: state.by.email,
+      time: timer.time
+    }
   });
-  console.log(newWorkout)
-  return newWorkout
-}
 
-const hydrateAttribution = (state, attribution) => {
-  var newState = cloneObject(state)
-  newState.from = attribution
+  console.log(newState)
   return newState
 }
 
@@ -312,10 +316,7 @@ export default function workout(state = initialState, action) {
     return hydrateWorkout(state, action.workout)
 
   case types.REPEAT:
-    return repeatWorkout(state, action.workout)
-
-  case types.HYDRATE_ATTRIBUTION:
-    return hydrateAttribution(state, action.attribution)
+    return repeatWorkout(state, action.timer)
 
   default:
     return state;

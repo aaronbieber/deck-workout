@@ -17,7 +17,6 @@ export const SAVED = 'SAVED'
 export const LOAD = 'LOAD'
 export const HYDRATE = 'HYDRATE'
 export const REPEAT = 'REPEAT'
-export const HYDRATE_ATTRIBUTION = 'HYDRATE_ATTRIBUTION'
 
 // timer
 export const TIMER_START = 'TIMER_START'

@@ -13,7 +13,7 @@ var WorkoutSchema = new mongoose.Schema({
   time: [Number],
   from: {
     id: String,
-    time: [Number],
+    time: { type: [Number], default: undefined },
     created: { type: Date },
     name: String,
     email: String

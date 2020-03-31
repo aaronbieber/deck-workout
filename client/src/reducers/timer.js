@@ -44,8 +44,13 @@ const now = () => {
 
 const hydrateTimer = (state, workout) => {
   var newState = cloneObject(state)
-
   newState.time = workout.time.map(t => t.toString().padStart(2, '0'))
+  return newState
+}
+
+const repeatTimer = (state) => {
+  var newState = cloneObject(state)
+  newState.from["time"] = state.workout.time.map(t => t.toString().padStart(2, '0'))
   return newState
 }
 
@@ -94,8 +99,11 @@ export default function timer(state = initialState, action) {
         }
         return state
 
-    // case types.HYDRATE:
-    //   return hydrateTimer(state, action.workout)
+    case types.HYDRATE:
+      return hydrateTimer(state, action.workout)
+
+    // case types.REPEAT:
+    //   return repeatTimer(state)
 
     default:
         return state
