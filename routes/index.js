@@ -96,8 +96,6 @@ router.get('/load/:workoutId', function(req, res, next) {
             by: stripIdFromUser(user.toObject())
           }))
         })
-
-      //res.json(workout)
     })
 })
 

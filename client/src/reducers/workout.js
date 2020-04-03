@@ -162,25 +162,23 @@ const generate = (state) => {
 }
 
 const buildCardPiles = (state) => {
-  if (state["drawIndex"] !== null) {
-    if (state["drawIndex"] === 0) {
-      state["draw"] = state["deck"].slice(0,1).reverse()
-      state["discard"] = state["deck"].slice(1)
+  var newState = cloneObject(state);
+
+  if (newState["drawIndex"] !== null) {
+    if (newState["drawIndex"] === 0) {
+      newState["draw"] = newState["deck"].slice(0,1).reverse()
+      newState["discard"] = newState["deck"].slice(1)
     } else {
-      state["draw"] = state["deck"].slice(state["drawIndex"],
-                                          state["drawIndex"] + state["drawCount"]).reverse()
-      state["discard"] = state["deck"].slice(state["drawIndex"] + state["drawCount"])
+      newState["draw"] = newState["deck"].slice(newState["drawIndex"],
+                                          newState["drawIndex"] + newState["drawCount"]).reverse()
+      newState["discard"] = newState["deck"].slice(newState["drawIndex"] + newState["drawCount"])
     }
   } else {
-    state["draw"] = []
-    state["discard"] = []
+    newState["draw"] = []
+    newState["discard"] = []
   }
 
-  state["done"] = (state.deck.length > 0 &&
-                   state.drawIndex !== null &&
-                   state.deck[state.drawIndex][0] === "done")
-
-  return state
+  return newState
 }
 
 const draw = (state, drawCountPref) => {
@@ -193,6 +191,11 @@ const draw = (state, drawCountPref) => {
   }
 
   newState = buildCardPiles(newState)
+
+  newState["done"] = (newState.deck.length > 0 &&
+                   newState.drawIndex !== null &&
+                   newState.deck[newState.drawIndex][0] === "done")
+
   return newState;
 }
 
@@ -252,7 +255,7 @@ const hydrateWorkout = (state, workout) => {
   }
 
   newState.drawIndex = 0
-  newState.done = true
+  //newState.done = true
   newState = buildCardPiles(newState)
   newState.stats = getStats(newState.deck)
 
@@ -269,6 +272,7 @@ const repeatWorkout = (state, timer) => {
 
   Object.assign(newState, {
     id: null,
+    by: null,
     created: null,
     done: false,
     draw: [],
