@@ -12,6 +12,19 @@ export const draw = () => {
     };
 }
 
+export const share = (time) => {
+    return {
+        type: types.SHARE,
+        time
+    };
+}
+
+export const toast = () => {
+    return {
+        type: types.TOAST
+    }
+}
+
 export const undo = () => {
     return {
         type: types.UNDO

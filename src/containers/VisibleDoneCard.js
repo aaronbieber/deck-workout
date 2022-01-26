@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { share } from '../actions';
 import DoneCard from '../components/DoneCard'
 
 const mapStateToProps = state => {
@@ -8,6 +9,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    shareClick: (time) => dispatch(share(time))
 });
 
 const VisibleDoneCard = connect(

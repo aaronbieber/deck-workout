@@ -108,6 +108,25 @@ html, body {
     font-weight: bold;
 }
 
+.drawn-cards .card-done button {
+    position: absolute;
+    padding: 0 10px;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: none;
+    background-color: white;
+    box-shadow: 4px 4px black;
+    color: black;
+    font-weight: normal;
+    font-size: 1.5em;
+}
+
+.drawn-cards .card-done button img {
+  width: 16px;
+  height: 16px;
+}
+
 .drawn-cards img:first-child {
     margin-left: 0;
 }
@@ -168,4 +187,32 @@ html, body {
 
 .padbox {
     padding: 1em;
+}
+
+#toast {
+  margin-bottom: 1em;
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 0.5em 1em;
+  background-color: #101088;
+  color: white;
+  border-radius: 10px;
+  animation: fadeIn ease-in-out 0.2s;
+}
+
+.toast-off {
+  display: none;
+  animation: fadeIn ease-in-out 0.2s;
+}
+
+.toast-on {
+  display: block;
+  animation: fadeIn ease-in-out 0.2s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

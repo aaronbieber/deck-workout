@@ -14,7 +14,8 @@ const initialState = {
     drawIndex: null,
     discardIndex: null,
     draw: [],
-    discard: []
+    discard: [],
+    toast: false
 };
 
 // This will come in handy when we support the UI to choose a fast workout
@@ -144,6 +145,21 @@ const setSuitExercise = (state, suit, exercise) => {
     return newState
 }
 
+const share = (state, time) => {
+    var newState = cloneObject(state)
+    var shareString = "WEDNESDAY PROJECT\n" +
+        "🏆 " + time + " 🏆\n\n" +
+        "♥ " + state.exercises.hearts + "\n" +
+        "♦ " + state.exercises.diamonds + "\n" +
+        "♣ " + state.exercises.clubs + "\n" +
+        "♠ " + state.exercises.spades + "\n\n" +
+        "wednesdayproject.com"
+
+    navigator.clipboard.writeText(shareString)
+    newState.toast = true
+    return newState;
+}
+
 export default function workout(state = initialState, action) {
     switch (action.type) {
     case types.GENERATE:
@@ -151,6 +167,9 @@ export default function workout(state = initialState, action) {
 
     case types.DRAW:
         return draw(state, state.drawCount);
+
+    case types.SHARE:
+        return share(state, action.time);
 
     case types.TOGGLE_DRAW_THREE:
         return drawThree(state);
