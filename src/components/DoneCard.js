@@ -22,9 +22,7 @@ export default class DoneCard extends Component {
               <img
                 alt="Done!"
                 src="/done.webp" />
-              <button onClick={this._shareClick}>Share <img
-                                                         alt="share icon"
-                                                         src="/images/share.png" /></button>
+              <button onClick={this._shareClick}>Share <span className="material-icons">share</span></button>
             </div>
         )
     }

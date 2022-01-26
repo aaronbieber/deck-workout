@@ -23,7 +23,8 @@ html, body {
     padding: 0 0.5em;
 }
 
-.playing-card i.material-icons {
+.card-done button span {
+    margin-left: 5px;
     float: right;
     line-height: 1.5em;
 }
@@ -93,11 +94,14 @@ html, body {
 }
 
 .drawn-cards .card-done img {
+    border-radius: 25px;
     width: 70%;
     margin-left: 0;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.drawn-cards .card-done span {
+.drawn-cards .card-done > span {
     position: absolute;
     top: 10px;
     left: 50%;
