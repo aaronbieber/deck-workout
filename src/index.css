@@ -23,9 +23,24 @@ html, body {
     padding: 0 0.5em;
 }
 
+.playing-card i {
+    float: right;
+    width: 1.5em;
+    text-align: center;
+    line-height: 1.5em;
+    cursor: pointer;
+}
+
+.playing-card i.edit {
+    background-color: #50596c;
+    width: 1.5em;
+    border-radius: 0.75em;
+    color: white;
+    text-align: center;
+}
+
 .card-done button span {
     margin-left: 5px;
-    float: right;
     line-height: 1.5em;
 }
 
