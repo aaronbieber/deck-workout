@@ -10,6 +10,17 @@ export default class ExerciseSelector extends Component {
         return Array.from(arguments).join("-").replace(/[^a-zA-Z-]/, "").toLowerCase()
     }
 
+    helpLink(exerciseData) {
+        if (exerciseData.hasOwnProperty("url")) {
+            return (
+                <a href={exerciseData.url} target="_blank">
+                  <span className="exrx material-icons">help_outline</span>
+                </a>
+            )
+        }
+        return ("")
+    }
+
     render() {
         var selectedExercise = this.props.exercises[this.props.suit]
 
@@ -25,6 +36,7 @@ export default class ExerciseSelector extends Component {
                               className="form-group">
                               <label className="form-label">{ data[group].name }</label>
                               { data[group].exercises.map(e => (
+                                  <div>
                                   <label
                                     key={ this.makeKey("ex", group, e.name) }
                                     className="form-radio">
@@ -36,6 +48,8 @@ export default class ExerciseSelector extends Component {
                                       name={ "select-" + this.props.suit }/>
                                     <i className="form-icon"></i> { e.name }
                                   </label>
+                                    {this.helpLink(e)}
+                                  </div>
                               ))}
                             </div>
                         )

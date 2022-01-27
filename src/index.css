@@ -197,7 +197,18 @@ html, body {
 }
 
 .form-radio {
-    display: block;
+    display: inline-block;
+}
+
+.form-group a {
+    color: gray;
+    position: relative;
+    bottom: -0.4em;
+    line-height: 1rem;
+    display: inline-block;
+}
+
+.form-group span.exrx {
 }
 
 #exercise-selector .form-label {
