@@ -110,7 +110,8 @@
         "exercises": [
             {
                 "name": "Reverse crunches",
-                "fast": false
+                "fast": false,
+                "url": "https://exrx.net/WeightExercises/HipFlexors/BWStraightLegRaise"
             },
             {
                 "name": "Bicycle crunches",
@@ -118,7 +119,8 @@
             },
             {
                 "name": "Scissor kicks",
-                "fast": true
+                "fast": true,
+                "url": "https://exrx.net/WeightExercises/HipFlexors/BWScissorKick"
             },
             {
                 "name": "Heel touches",
@@ -130,11 +132,13 @@
             },
             {
                 "name": "Sit-ups",
-                "fast": true
+                "fast": true,
+                "url": "https://exrx.net/WeightExercises/RectusAbdominis/BWSitUp"
             },
             {
                 "name": "Crunches",
-                "fast": true
+                "fast": true,
+                "url": "https://exrx.net/WeightExercises/RectusAbdominis/BWCrunch"
             },
             {
                 "name": "Russian twists",
@@ -142,7 +146,8 @@
             },
             {
                 "name": "Mountain climbers",
-                "fast": true
+                "fast": true,
+                "url": "https://exrx.net/Aerobic/Exercises/MountainClimber"
             },
             {
                 "name": "Deep squat rotations",
@@ -166,7 +171,8 @@
             },
             {
                 "name": "Jackknives",
-                "fast": true
+                "fast": true,
+                "url": "https://exrx.net/WeightExercises/RectusAbdominis/WtJackKnifeSitUp"
             },
             {
                 "name": "Plank knees to elbows",
@@ -180,7 +186,8 @@
         "exercises": [
             {
                 "name": "Bird dogs",
-                "fast": true
+                "fast": true,
+                "url": "https://exrx.net/WeightExercises/ErectorSpinae/BWBirdDog"
             },
             {
                 "name": "Dead bugs",
