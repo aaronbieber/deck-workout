@@ -174,18 +174,31 @@ html, body {
 .progress-progress {
     height: 10px;
     width: 0%;
-    background-color: #ffe52b;
+    /* background-color: #ffe52b; */
+    background-color: #70e224;
     float: left;
+    transition: width 0.5s ease-out;
 }
 
 .progress-last {
     float: left;
     background-color: #70e224;
+    transition: width 0.5s ease-out;
 }
 
 .progress-next {
+    animation: animateGradient 1s linear infinite;
     background-color: white;
-    border: 1px solid #70e224;
+    /* border: 1px solid #70e224; */
+    /* background-color: #ffe52b; */
+    background-image: linear-gradient(30deg, #DBC30D, #FFF6B5, #DBC30D, #FFF6B5, #DBC30D);
+    background-size: 220% 100%;
+    transition: width 0.5s ease-out;
+}
+
+@keyframes animateGradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 0%; }
 }
 
 .hide-link {
