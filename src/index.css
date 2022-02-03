@@ -191,8 +191,8 @@ html, body {
     background-color: white;
     /* border: 1px solid #70e224; */
     /* background-color: #ffe52b; */
-    background-image: linear-gradient(30deg, #DBC30D, #FFF6B5, #DBC30D, #FFF6B5, #DBC30D);
-    background-size: 220% 100%;
+    background-image: linear-gradient(90deg, #DBC30D, #FFF6B5, #DBC30D, #FFF6B5, #DBC30D);
+    background-size: 200% 100%;
     transition: width 0.5s ease-out;
 }
 
