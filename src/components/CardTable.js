@@ -4,12 +4,19 @@ import VisibleDoneCard from '../containers/VisibleDoneCard'
 import debounce from 'lodash/debounce'
 
 export default class CardTable extends Component {
-    cardFile = (suit, num) => {
+    componentDidUpdate = (prevProps) => {
+        // Preload all card images as soon as the deck is generated
+        if (prevProps.deck.length === 0 &&
+            prevProps.deck.length !== this.props.deck.length) {
 
-        if (this.props.draw.length === 0) {
-            return '/cards/2x/back-navy.png';
+            console.log(this.props.deck)
+            for (const card of this.props.deck) {
+                new Image().src = this.cardFile(card[0], card[1])
+            }
         }
+    }
 
+    cardFile = (suit, num) => {
         if (suit.indexOf("joker") > -1) {
             return '/cards/2x/' + suit + '.png';
         }
