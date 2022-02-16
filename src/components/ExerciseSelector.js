@@ -36,18 +36,18 @@ export default class ExerciseSelector extends Component {
                               className="form-group">
                               <label className="form-label">{ data[group].name }</label>
                               { data[group].exercises.map(e => (
-                                  <div>
-                                  <label
-                                    key={ this.makeKey("ex", group, e.name) }
-                                    className="form-radio">
-                                    <input
-                                      checked={ selectedExercise === e.name }
-                                      value={ e.name }
-                                      onChange={ this._fieldChanged }
-                                      type="radio"
-                                      name={ "select-" + this.props.suit }/>
-                                    <i className="form-icon"></i> { e.name }
-                                  </label>
+                                  <div key={ this.makeKey("help-wrap", group, e.name) }>
+                                    <label
+                                      key={ this.makeKey("ex", group, e.name) }
+                                      className="form-radio">
+                                      <input
+                                        checked={ selectedExercise === e.name }
+                                        value={ e.name }
+                                        onChange={ this._fieldChanged }
+                                        type="radio"
+                                        name={ "select-" + this.props.suit }/>
+                                      <i className="form-icon"></i> { e.name }
+                                    </label>
                                     {this.helpLink(e)}
                                   </div>
                               ))}
