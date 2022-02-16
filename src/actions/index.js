@@ -1,5 +1,12 @@
 import * as types from './actionTypes';
 
+export const setSeed = (seed) => {
+    return {
+        type: types.SET_SEED,
+        seed
+    }
+}
+
 export const generate = () => {
     return {
         type: types.GENERATE

@@ -4,6 +4,7 @@ export const TOGGLE_DRAW_THREE = 'TOGGLE_DRAW_THREE'
 export const UNDO = 'UNDO'
 export const SHARE = 'SHARE'
 export const TOAST = 'TOAST'
+export const SET_SEED = 'SET_SEED'
 
 export const TIMER_START = 'TIMER_START'
 export const TIMER_STOP = 'TIMER_STOP'

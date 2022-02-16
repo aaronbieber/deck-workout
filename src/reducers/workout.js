@@ -1,6 +1,18 @@
 import * as types from '../actions/actionTypes'
 import data from '../data/exercises'
 import { cloneObject } from '../utils'
+import seedrandom from 'seedrandom'
+
+const generateSeed = () => {
+    let chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+
+    let str = ''
+    for (let i = 0; i < 8; i++) {
+        str += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return str
+}
 
 const initialState = {
     drawCount: 3,
@@ -15,13 +27,21 @@ const initialState = {
     discardIndex: null,
     draw: [],
     discard: [],
-    toast: false
+    toast: false,
+    seed: generateSeed()
 };
 
 // This will come in handy when we support the UI to choose a fast workout
 // const filterExercises = (data, fast) => {
 //     return data.filter(ex => ex.fast == fast)
 // }
+
+const setSeed = (state, seed) => {
+    var newState = cloneObject(state)
+    newState.seed = seed
+    seedrandom(seed, { global: true })
+    return generate(newState)
+}
 
 const buildDeck = () => {
     var deck = [];
@@ -162,6 +182,9 @@ const share = (state, time) => {
 
 export default function workout(state = initialState, action) {
     switch (action.type) {
+    case types.SET_SEED:
+        return setSeed(state, action.seed)
+
     case types.GENERATE:
         return generate(state);
 
