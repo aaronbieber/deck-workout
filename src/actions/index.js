@@ -7,6 +7,12 @@ export const setSeed = (seed) => {
     }
 }
 
+export const randomizeExercises = () => {
+    return {
+        type: types.RANDOMIZE
+    }
+}
+
 export const generate = () => {
     return {
         type: types.GENERATE

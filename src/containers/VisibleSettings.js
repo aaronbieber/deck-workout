@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { timerStop, timerReset, generate } from "../actions"
+import { timerStop, timerReset, randomizeExercises } from "../actions"
 import Settings from '../components/Settings.js'
 
 const mapStateToProps = state => ({
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     timerStop: () => dispatch(timerStop()),
     timerReset: () => dispatch(timerReset()),
-    generate: () => dispatch(generate())
+    randomize: () => dispatch(randomizeExercises())
 });
 
 const VisibleSettings = connect(

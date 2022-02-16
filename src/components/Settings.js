@@ -15,7 +15,7 @@ export default class Settings extends Component {
 
         this.props.timerStop();
         this.props.timerReset();
-        this.props.generate();
+        this.props.randomize();
     }
 
     render() {

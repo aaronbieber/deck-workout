@@ -2,44 +2,96 @@ import * as types from '../actions/actionTypes'
 import data from '../data/exercises'
 import { cloneObject } from '../utils'
 import seedrandom from 'seedrandom'
+const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-const generateSeed = () => {
-    let chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+const getAllExercises = () => {
+    var allExercises = []
+    for (const group of Object.keys(data)) {
+        allExercises = [...allExercises, ...data[group]["exercises"].map(e => e.name)]
+    }
+    return allExercises
+}
 
-    let str = ''
-    for (let i = 0; i < 8; i++) {
+const encodeExercise = (exercise) => {
+    return chars.charAt(getAllExercises().indexOf(exercise))
+}
+
+const generateSeed = (exercises) => {
+    var allExercises = getAllExercises()
+    var str =
+        encodeExercise(exercises.hearts) +
+        encodeExercise(exercises.diamonds) +
+        encodeExercise(exercises.clubs) +
+        encodeExercise(exercises.spades)
+
+    for (let i = 0; i < 6; i++) {
         str += chars.charAt(Math.floor(Math.random() * chars.length));
     }
 
     return str
 }
 
+const updateSeedFromExercises = (state) => {
+    var newState = cloneObject(state)
+
+    newState.seed =
+        encodeExercise(state.exercises.hearts) +
+        encodeExercise(state.exercises.diamonds) +
+        encodeExercise(state.exercises.clubs) +
+        encodeExercise(state.exercises.spades) +
+        state.seed.substring(4)
+
+    return newState
+}
+
+const decodeExercise = (key) => {
+    return getAllExercises()[chars.indexOf(key)]
+}
+
+const randomExercise = (group) => {
+    if (group === "") {
+        var allExercises = getAllExercises()
+        return allExercises[Math.floor(Math.random() * allExercises.length)]
+    }
+
+    return data[group]["exercises"][Math.floor(Math.random() * data[group]["exercises"].length)]["name"]
+}
+
+const getRandomExercises = () => {
+    return {
+        hearts:   randomExercise("upper"),
+        diamonds: randomExercise("lower"),
+        clubs:    randomExercise("core"),
+        spades:   randomExercise("")
+    }
+}
+
+const initialExercises = getRandomExercises()
 const initialState = {
     drawCount: 3,
-    exercises: {
-        hearts: '...',
-        diamonds: '...',
-        clubs: '...',
-        spades: '...'
-    },
+    exercises: initialExercises,
     deck: [],
     drawIndex: null,
     discardIndex: null,
     draw: [],
     discard: [],
     toast: false,
-    seed: generateSeed()
+    seed: generateSeed(initialExercises)
 };
-
-// This will come in handy when we support the UI to choose a fast workout
-// const filterExercises = (data, fast) => {
-//     return data.filter(ex => ex.fast == fast)
-// }
 
 const setSeed = (state, seed) => {
     var newState = cloneObject(state)
+
+    newState.exercises = {
+        hearts:   decodeExercise(seed[0]),
+        diamonds: decodeExercise(seed[1]),
+        clubs:    decodeExercise(seed[2]),
+        spades:   decodeExercise(seed[3])
+    }
     newState.seed = seed
-    seedrandom(seed, { global: true })
+
+    seedrandom(seed.substring(4), { global: true })
+
     return generate(newState)
 }
 
@@ -57,27 +109,7 @@ const buildDeck = () => {
     return deck;
 }
 
-const spliceExercise = exercises => {
-    return exercises.splice(Math.floor(Math.random() * exercises.length), 1)[0];
-}
-
 const generate = (state) => {
-    var groups = Object.keys(data);
-    var randGroup = groups[Math.floor(Math.random() * groups.length)];
-    var localData = {};
-
-    // slice(0) is a trick to get a clone of an array; we have to
-    // create a "deep clone" of this object because splice() is
-    // destructive (on purpose, to prevent duplicates)
-    localData = cloneObject(data)
-
-    var newExercises = {
-        hearts:   spliceExercise(localData["upper"]["exercises"])["name"],
-        diamonds: spliceExercise(localData["lower"]["exercises"])["name"],
-        clubs:    spliceExercise(localData["core"]["exercises"])["name"],
-        spades:   spliceExercise(localData[randGroup]["exercises"])["name"]
-    };
-
     // Reshuffle until we get a deck that doesn't begin with a joker
     do {
         var sortedDeck = buildDeck();
@@ -95,7 +127,6 @@ const generate = (state) => {
     shuffledDeck.unshift(["done", 0])
 
     return Object.assign({}, state, {
-        exercises: newExercises,
         deck: shuffledDeck,
         draw: [],
         drawIndex: null,
@@ -162,7 +193,13 @@ const drawThree = (state) => {
 const setSuitExercise = (state, suit, exercise) => {
     var newState = cloneObject(state)
     newState.exercises[suit] = exercise
-    return newState
+    return updateSeedFromExercises(newState)
+}
+
+const randomizeExercises = (state) => {
+    var newState = cloneObject(state)
+    newState.exercises = getRandomExercises()
+    return updateSeedFromExercises(newState)
 }
 
 const share = (state, time) => {
@@ -184,6 +221,9 @@ export default function workout(state = initialState, action) {
     switch (action.type) {
     case types.SET_SEED:
         return setSeed(state, action.seed)
+
+    case types.RANDOMIZE:
+        return randomizeExercises(state)
 
     case types.GENERATE:
         return generate(state);
