@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { timerAwareUndo, timerRestart } from '../actions';
+import { timerAwareUndo, timerRestart } from '../actions'
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -10,11 +10,11 @@ class NavBar extends Component {
     }
 
     onInnerPage = (match, location) => {
-        return location.pathname !== '/'
+        return this.props.home !== true
     }
 
     onMainPage = (match, location) => {
-        return location.pathname === '/'
+        return this.props.home === true
     }
 
     render() {
