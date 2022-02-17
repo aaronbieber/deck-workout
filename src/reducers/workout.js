@@ -17,7 +17,6 @@ const encodeExercise = (exercise) => {
 }
 
 const generateSeed = (exercises) => {
-    var allExercises = getAllExercises()
     var str =
         encodeExercise(exercises.hearts) +
         encodeExercise(exercises.diamonds) +
