@@ -209,7 +209,7 @@ const share = (state, time) => {
         "♦ " + state.exercises.diamonds + "\n" +
         "♣ " + state.exercises.clubs + "\n" +
         "♠ " + state.exercises.spades + "\n\n" +
-        "deck.aaronbieber.com/" + state.seed
+        "deck.aaronbieber.com/#" + state.seed
 
     navigator.clipboard.writeText(shareString)
     newState.toast = true
