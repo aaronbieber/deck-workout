@@ -128,7 +128,7 @@ const buildCardPiles = (state) => {
             state["discard"] = state["deck"].slice(1)
         } else {
             state["draw"] = state["deck"].slice(state["drawIndex"],
-                                                state["drawIndex"] + state["drawCount"])
+                                                state["drawIndex"] + state["drawCount"]).reverse()
             state["discard"] = state["deck"].slice(state["drawIndex"] + state["drawCount"])
         }
     } else {
