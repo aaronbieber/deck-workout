@@ -65,19 +65,6 @@ const getRandomExercises = () => {
     }
 }
 
-const initialExercises = getRandomExercises()
-const initialState = {
-    drawCount: 3,
-    exercises: initialExercises,
-    deck: [],
-    drawIndex: null,
-    discardIndex: null,
-    draw: [],
-    discard: [],
-    toast: false,
-    seed: generateSeed(initialExercises)
-};
-
 const setSeed = (state, seed) => {
     var newState = cloneObject(state)
 
@@ -215,6 +202,19 @@ const share = (state, time) => {
     newState.toast = true
     return newState;
 }
+
+const initialExercises = getRandomExercises()
+const initialState = {
+    drawCount: 3,
+    exercises: initialExercises,
+    deck: [],
+    drawIndex: null,
+    discardIndex: null,
+    draw: [],
+    discard: [],
+    toast: false,
+    seed: generateSeed(initialExercises)
+};
 
 export default function workout(state = initialState, action) {
     switch (action.type) {
