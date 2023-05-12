@@ -76,8 +76,6 @@ const setSeed = (state, seed) => {
     }
     newState.seed = seed
 
-    seedrandom(seed.substring(4), { global: true })
-
     return generate(newState)
 }
 
@@ -96,6 +94,8 @@ const buildDeck = () => {
 }
 
 const generate = (state) => {
+    var rando = seedrandom(state.seed.substring(4) + '\0')
+
     // Reshuffle until we get a deck that doesn't begin with a joker
     do {
         var sortedDeck = buildDeck();
@@ -104,7 +104,7 @@ const generate = (state) => {
         // Shuffle deck
         while (sortedDeck.length > 0) {
             shuffledDeck.push(
-                sortedDeck.splice(Math.floor(Math.random() * sortedDeck.length), 1)[0]
+                sortedDeck.splice(Math.floor(rando() * sortedDeck.length), 1)[0]
             )
         }
     } while (   shuffledDeck[shuffledDeck.length-1][0] === 'red_joker'
