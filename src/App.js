@@ -11,6 +11,3 @@ class App extends Component {
 }
 
 export default App;
-
-// This is how you do your init thing
-// store.dispatch();
