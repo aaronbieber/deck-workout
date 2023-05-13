@@ -10,6 +10,7 @@ export default class CardTable extends Component {
             prevProps.deck.length !== this.props.deck.length) {
 
             for (const card of this.props.deck) {
+                if (card[0] === 'done') continue
                 new Image().src = this.cardFile(card[0], card[1])
             }
         }
