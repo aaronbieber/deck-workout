@@ -16,21 +16,18 @@ const DeckWorkout = (props) => {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const getSeed = () => {
-        var hash = location.hash
-        if (/^#[a-zA-Z0-9]{10}/.test(hash)) {
-            return hash.substring(1)
-        }
-        return false
-    }
-
     useEffect(() => {
-        if (getSeed() === false) {
+        var hash = window.location.hash
+        var seed = /^#[a-zA-Z0-9]{10}/.test(hash) ? hash.substring(1) : false
+
+        if (seed === false) {
+            console.log('Updating URL with state value: ' + stateSeed.substring(4))
             history.replace('/#' + stateSeed)
-        } else if (getSeed() !== stateSeed) {
-            dispatch(setSeed(getSeed()))
+        } else if (seed !== stateSeed) {
+            console.log('Setting state seed value to:   ' + seed.substring(4))
+            dispatch(setSeed(seed))
         }
-    })
+    }, [window.location.hash])
 
     return (
         <div>

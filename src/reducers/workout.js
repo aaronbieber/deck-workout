@@ -94,7 +94,9 @@ const buildDeck = () => {
 }
 
 const generate = (state) => {
-    var rando = seedrandom(state.seed.substring(4) + '\0')
+    var seed = state.seed.substring(4)
+    var rando = seedrandom(seed + '\0')
+    console.log('Generating with seed ' + seed + '...')
 
     // Reshuffle until we get a deck that doesn't begin with a joker
     do {
@@ -109,6 +111,11 @@ const generate = (state) => {
         }
     } while (   shuffledDeck[shuffledDeck.length-1][0] === 'red_joker'
              || shuffledDeck[shuffledDeck.length-1][0] === 'black_joker')
+
+    console.log("%s, %s, %s",
+        shuffledDeck[shuffledDeck.length - 1],
+        shuffledDeck[shuffledDeck.length - 2],
+        shuffledDeck[shuffledDeck.length - 3])
 
     shuffledDeck.unshift(["done", 0])
 
