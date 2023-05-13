@@ -21,10 +21,8 @@ const DeckWorkout = (props) => {
         var seed = /^#[a-zA-Z0-9]{10}/.test(hash) ? hash.substring(1) : false
 
         if (seed === false) {
-            console.log('Updating URL with state value: ' + stateSeed.substring(4))
             history.replace('/#' + stateSeed)
         } else if (seed !== stateSeed) {
-            console.log('Setting state seed value to:   ' + seed.substring(4))
             dispatch(setSeed(seed))
         }
     }, [window.location.hash])
