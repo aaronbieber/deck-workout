@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { setSeed } from '../actions/index.js'
 import NavBar from '../components/NavBar'
 import ProgressBar from '../components/ProgressBar'
-import VisibleCardTable from '../containers/VisibleCardTable'
+import CardTable from '../components/CardTable'
 import VisibleTimer from '../containers/VisibleTimer'
 import Cards from './Cards'
 import VisibleToast from '../containers/VisibleToast'
@@ -32,7 +32,7 @@ const DeckWorkout = (props) => {
           <Cards exercises={ exercises }/>
           <ProgressBar />
           <VisibleTimer />
-          <VisibleCardTable />
+          <CardTable />
           <VisibleToast/>
         </div>
     )

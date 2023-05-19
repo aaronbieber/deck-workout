@@ -1,123 +1,134 @@
-import React, { Component } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cloneObject } from '../utils'
 import VisibleDoneCard from '../containers/VisibleDoneCard'
 import debounce from 'lodash/debounce'
+import { useDispatch, useSelector } from 'react-redux'
+import { timerStart, timerStop, draw as drawAction } from '../actions'
 
-export default class CardTable extends Component {
-    componentDidUpdate = (prevProps) => {
-        // Preload all card images as soon as the deck is generated
-        if (prevProps.deck.length === 0 &&
-            prevProps.deck.length !== this.props.deck.length) {
+const CardTable = (props) => {
+  const dispatch = useDispatch()
+  const drawCount = useSelector((state) => state.workout.drawCount)
+  const draw = useSelector((state) => state.workout.draw)
+  const drawIndex = useSelector((state) => state.workout.drawIndex)
+  const deck = useSelector((state) => state.workout.deck)
+  const discard = useSelector((state) => state.workout.discard)
 
-            for (const card of this.props.deck) {
-                if (card[0] === 'done') continue
-                new Image().src = this.cardFile(card[0], card[1])
-            }
-        }
+  // Local component state tracks image preload status,
+  // just so we don't try to preload multiple times.
+  const [imagesLoaded, setImagesLoaded] = useState(false)
+
+  useEffect(() => {
+    if (deck.length > 0 && !imagesLoaded) {
+      for (const card of deck) {
+        if (card[0] === 'done') continue
+        new Image().src = cardFile(card[0], card[1])
+      }
+      setImagesLoaded(true)
+    }
+  }, [deck])
+
+  const cardFile = (suit, num) => {
+    if (suit.indexOf("joker") > -1) {
+      return '/cards/2x/' + suit + '.png'
     }
 
-    cardFile = (suit, num) => {
-        if (suit.indexOf("joker") > -1) {
-            return '/cards/2x/' + suit + '.png';
-        }
-
-        var numToName = {
-            14: '1',
-            11: 'jack',
-            12: 'queen',
-            13: 'king'
-        };
-
-        var suitToSuit = {
-            hearts: 'heart',
-            diamonds: 'diamond',
-            clubs: 'club',
-            spades: 'spade'
-        };
-
-        if (num in numToName) {
-            num = numToName[num];
-        }
-
-        return '/cards/2x/' + num + '_' + suitToSuit[suit] + '.png';
+    var numToName = {
+      14: '1',
+      11: 'jack',
+      12: 'queen',
+      13: 'king'
     }
 
-    cardImageTag = (src, className) => {
-        return (
-            <img onClick={ this._drawClick }
-                 onTouchEnd={ this._drawClick }
-                 className={ className }
-                 key={ src }
-                 src={ src }
-                 alt="playing card" />
-        )
+    var suitToSuit = {
+      hearts: 'heart',
+      diamonds: 'diamond',
+      clubs: 'club',
+      spades: 'spade'
     }
 
-    cardImages = (draw) => {
-        var suit, num, src
-        var images = []
-        var cards = cloneObject(draw)
-        var imageClass = ''
-
-        if (cards.length === 0) {
-            return [this.cardImageTag('/cards/2x/back-navy.png')];
-        }
-
-        // If the first card in the draw is a joker, we
-        // display the last card of the previous draw for
-        // reference.
-        if (cards[0][0].indexOf('joker') > -1) {
-            cards.unshift(this.props.discard[this.props.drawCount-1])
-        }
-
-        for (var i=0; i<cards.length; i++) {
-            if (cards[i][0] === "done") {
-                images.push(<VisibleDoneCard key="card-done" />)
-            } else {
-                suit = cards[i][0]
-                num = cards[i][1]
-                src = this.cardFile(suit, num)
-
-                images.push(this.cardImageTag(src, imageClass))
-            }
-
-        }
-
-        return images;
+    if (num in numToName) {
+      num = numToName[num]
     }
 
-    _drawClick = debounce((e) => {
-        if (this.props.drawIndex === null) {
-            this.props.timerStart()
-        }
+    return '/cards/2x/' + num + '_' + suitToSuit[suit] + '.png'
+  }
 
-        if (this.props.drawIndex === 1) {
-            this.props.timerStop()
-        }
+  const cardImageTag = (src, className) => {
+    return (
+      <img onClick={_drawClick}
+        onTouchEnd={_drawClick}
+        className={className}
+        key={src}
+        src={src}
+        alt="playing card" />
+    )
+  }
 
-        this.props.drawClick()
-    }, 200)
+  const generateCardImages = (draw) => {
+    var suit, num, src
+    var images = []
+    var cards = cloneObject(draw)
+    var imageClass = ''
 
-    render() {
-        var cardTableClass = "drawn-cards",
-            cardImages = this.cardImages(this.props.draw);
+    if (cards.length === 0) {
+      return [cardImageTag('/cards/2x/back-navy.png')]
+    }
 
-        if (this.props.drawCount === 1) {
-            cardTableClass += " draw-one";
-        }
+    // If the first card in the draw is a joker, we
+    // display the last card of the previous draw for
+    // reference.
+    if (cards[0][0].indexOf('joker') > -1) {
+      cards.unshift(discard[drawCount - 1])
+    }
 
-        // Right now, this will only happen when a joker is drawn on a
-        // draw-one, or drawn as the first of a draw-three, otherwise
-        // the length of cardImages will always be 1 or 3.
-        if (cardImages.length === 2 ||
-            cardImages.length === 4) {
-            cardTableClass += " first-joker";
-        }
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i][0] === "done") {
+        images.push(<VisibleDoneCard key="card-done" />)
+      } else {
+        suit = cards[i][0]
+        num = cards[i][1]
+        src = cardFile(suit, num)
 
-        return (
-            <div className={ cardTableClass }>
-              {cardImages}
-            </div>
-        );
-    };
+        images.push(cardImageTag(src, imageClass))
+      }
+
+    }
+
+    return images
+  }
+
+  const _drawClick = debounce((e) => {
+    if (drawIndex === null) {
+      dispatch(timerStart())
+    }
+
+    if (drawIndex === 1) {
+      dispatch(timerStop())
+    }
+
+    dispatch(drawAction())
+  }, 200)
+
+  const cardTableClass = "drawn-cards"
+  const cardImages = generateCardImages(draw)
+
+  if (drawCount === 1) {
+    cardTableClass += " draw-one"
+  }
+
+  // Right now, this will only happen when a joker is drawn on a
+  // draw-one, or drawn as the first of a draw-three, otherwise
+  // the length of cardImages will always be 1 or 3.
+  if (cardImages.length === 2 ||
+    cardImages.length === 4) {
+    cardTableClass += " first-joker"
+  }
+
+  return (
+    <div className={cardTableClass}>
+      {cardImages}
+    </div>
+  )
 }
+
+export default CardTable
