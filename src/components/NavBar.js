@@ -1,75 +1,57 @@
-import { connect } from 'react-redux'
-import { timerAwareUndo, timerRestart } from '../actions'
-import React, { Component } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { timerAwareUndo } from '../actions'
 import { NavLink } from 'react-router-dom'
 
-class NavBar extends Component {
-    _undo = (e) => {
-        e.preventDefault()
-        this.props.undoClick()
-    }
+const NavBar = (props) => {
+  const dispatch = useDispatch()
+  const drawIndex = useSelector((state) => state.workout.drawIndex)
+  const onInnerPage = (match, location) => {
+    return props.home !== true
+  }
 
-    onInnerPage = (match, location) => {
-        return this.props.home !== true
-    }
+  const onMainPage = (match, location) => {
+    return props.home === true
+  }
 
-    onMainPage = (match, location) => {
-        return this.props.home === true
-    }
+  var undoClass = 'material-icons'
+  if (drawIndex === null || props.noUndo) {
+    undoClass += ' unavailable'
+  }
 
-    render() {
-        var undoClass = 'material-icons'
-        if (this.props.drawIndex === null || this.props.noUndo) {
-            undoClass += ' unavailable'
-        }
+  return (
+    <header className="navbar">
+      <section className="navbar-section navbar-icon">
+        <NavLink
+          to="/"
+          isActive={onInnerPage}
+          activeClassName="show-link"
+        >
+          <i className="material-icons">arrow_back</i>
+        </NavLink>
 
-        return (
-            <header className="navbar">
-              <section className="navbar-section navbar-icon">
-                <NavLink
-                  to="/"
-                  isActive={ this.onInnerPage }
-                  activeClassName="show-link"
-                  >
-                  <i className="material-icons">arrow_back</i>
-                </NavLink>
+        <i className={undoClass} onClick={() => dispatch(timerAwareUndo())}>undo</i>
+      </section>
+      <section className="navbar-center">
+        <h1>Wednesday Project</h1>
+      </section>
+      <section className="navbar-section navbar-icon navbar-icon-right">
+        <NavLink
+          to="/help"
+          className="help-link"
+          isActive={onMainPage}
+          activeClassName="show-link">
+          <i className="material-icons help-icon">help</i>
+        </NavLink>
 
-                <i className={ undoClass } onClick={ this._undo }>undo</i>
-              </section>
-              <section className="navbar-center">
-                <h1>Wednesday Project</h1>
-              </section>
-              <section className="navbar-section navbar-icon navbar-icon-right">
-                <NavLink
-                  to="/help"
-                  className="help-link"
-                  isActive={ this.onMainPage }
-                  activeClassName="show-link">
-                  <i className="material-icons help-icon">help</i>
-                </NavLink>
-
-                <NavLink
-                  to="/settings"
-                  isActive={ this.onMainPage }
-                  activeClassName="show-link">
-                  <i className="material-icons">settings</i>
-                </NavLink>
-              </section>
-            </header>
-        );
-    }
+        <NavLink
+          to="/settings"
+          isActive={onMainPage}
+          activeClassName="show-link">
+          <i className="material-icons">settings</i>
+        </NavLink>
+      </section>
+    </header>
+  )
 }
 
-const mapStateToProps = state => ({
-    drawIndex: state.workout.drawIndex
-})
-
-const mapDispatchToProps = dispatch => ({
-    undoClick: () => dispatch(timerAwareUndo()),
-    timerRestart: () => dispatch(timerRestart())
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NavBar)
+export default NavBar
