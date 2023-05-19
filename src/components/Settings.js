@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import NavBar from './NavBar'
-import VisibleCards from '../containers/VisibleCards'
-import VisibleSwitch from '../containers/VisibleSwitch';
-import VisibleExerciseSelector from "../containers/VisibleExerciseSelector"
+import Cards from './Cards'
+import VisibleSwitch from '../containers/VisibleSwitch'
+import VisibleExerciseSelector from '../containers/VisibleExerciseSelector'
 
 export default class Settings extends Component {
     _generate = (e) => {
@@ -61,7 +61,7 @@ export default class Settings extends Component {
         return (
             <div>
               <NavBar noUndo={ true } />
-              <VisibleCards exercises={ this.props.exercises } edit={ this.props.location.pathname === "/settings" } />
+              <Cards exercises={ this.props.exercises } edit={ this.props.location.pathname === "/settings" } />
 
               { pageContent }
             </div>

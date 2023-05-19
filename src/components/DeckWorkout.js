@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar'
 import ProgressBar from '../components/ProgressBar'
 import VisibleCardTable from '../containers/VisibleCardTable'
 import VisibleTimer from '../containers/VisibleTimer'
-import VisibleCards from '../containers/VisibleCards'
+import Cards from './Cards'
 import VisibleToast from '../containers/VisibleToast'
 
 const DeckWorkout = (props) => {
@@ -29,7 +29,7 @@ const DeckWorkout = (props) => {
     return (
         <div>
           <NavBar home={true} />
-          <VisibleCards exercises={ exercises }/>
+          <Cards exercises={ exercises }/>
           <ProgressBar />
           <VisibleTimer />
           <VisibleCardTable />
