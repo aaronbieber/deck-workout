@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { cloneObject } from '../utils'
-import VisibleDoneCard from '../containers/VisibleDoneCard'
+import DoneCard from './DoneCard'
 import debounce from 'lodash/debounce'
 import { useDispatch, useSelector } from 'react-redux'
 import { timerStart, timerStop, draw as drawAction } from '../actions'
@@ -83,7 +83,7 @@ const CardTable = (props) => {
 
     for (var i = 0; i < cards.length; i++) {
       if (cards[i][0] === "done") {
-        images.push(<VisibleDoneCard key="card-done" />)
+        images.push(<DoneCard key="card-done" />)
       } else {
         suit = cards[i][0]
         num = cards[i][1]
@@ -109,7 +109,7 @@ const CardTable = (props) => {
     dispatch(drawAction())
   }, 200)
 
-  const cardTableClass = "drawn-cards"
+  var cardTableClass = "drawn-cards"
   const cardImages = generateCardImages(draw)
 
   if (drawCount === 1) {

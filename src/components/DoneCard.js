@@ -1,29 +1,28 @@
-import React, { Component } from 'react'
 import debounce from 'lodash/debounce'
+import { share } from '../actions'
+import { useDispatch, useSelector } from 'react-redux'
 
-export default class DoneCard extends Component {
+const DoneCard = (props) => {
+  const dispatch = useDispatch()
+  const time = useSelector((state) => state.timer.time)
 
-    getTimeString = () => {
-        return this.props.time[0] +
-            ':' +
-            this.props.time[1] +
-            ':' +
-            this.props.time[2]
-    }
+  const getTimeString = () => {
+    return time[0] +
+      ':' +
+      time[1] +
+      ':' +
+      time[2]
+  }
 
-    _shareClick = debounce((e) => {
-        this.props.shareClick(this.getTimeString())
-    }, 200)
-
-    render() {
-        return (
-            <div className="card-done">
-              <span>{ this.getTimeString() }</span>
-              <img
-                alt="Done!"
-                src="/done.webp" />
-              <button onClick={this._shareClick}>Share <span className="material-icons">share</span></button>
-            </div>
-        )
-    }
+  return (
+    <div className="card-done">
+      <span>{getTimeString()}</span>
+      <img
+        alt="Done!"
+        src="/done.webp" />
+      <button onClick={() => dispatch(share(getTimeString()))}>Share <span className="material-icons">share</span></button>
+    </div>
+  )
 }
+
+export default DoneCard
