@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import { setSeed } from '../actions/index.js'
 import NavBar from '../components/NavBar'
-import VisibleProgressBar from '../containers/VisibleProgressBar'
+import ProgressBar from '../components/ProgressBar'
 import VisibleCardTable from '../containers/VisibleCardTable'
 import VisibleTimer from '../containers/VisibleTimer'
 import VisibleCards from '../containers/VisibleCards'
@@ -31,7 +31,7 @@ const DeckWorkout = (props) => {
         <div>
           <NavBar home={true} />
           <VisibleCards exercises={ exercises }/>
-          <VisibleProgressBar />
+          <ProgressBar />
           <VisibleTimer />
           <VisibleCardTable />
           <VisibleToast/>
