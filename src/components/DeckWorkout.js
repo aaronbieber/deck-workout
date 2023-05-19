@@ -11,7 +11,6 @@ import VisibleToast from '../containers/VisibleToast'
 
 const DeckWorkout = (props) => {
     const stateSeed = useSelector((state) => state.workout.seed)
-    const location = useLocation()
     const exercises = useSelector((state) => state.workout.exercises)
     const history = useHistory()
     const dispatch = useDispatch()
