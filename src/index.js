@@ -11,6 +11,7 @@ import * as reducers from './reducers';
 
 var reducer = combineReducers(reducers);
 var store = createStore(reducer, applyMiddleware(thunk));
+store.dispatch(generate());
 
 render(<Root store={ store } />, document.getElementById('root'));
 
@@ -22,5 +23,3 @@ caches.keys().then((names) => {
     caches.delete(name)
   }
 })
-
-store.dispatch(generate());
