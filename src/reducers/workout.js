@@ -173,6 +173,12 @@ const undo = (state) => {
 const drawThree = (state) => {
     var newState = cloneObject(state)
     newState.drawCount = (newState.drawCount === 1) ? 3 : 1
+    // If the draw count is changed from one to three with fewer than three
+    // cards discarded, we'll attempt to read beyond the end of the deck array,
+    // so just move the draw index exactly three cards from the end.
+    if (newState.drawCount === 3 && newState.drawIndex > newState.deck.length - newState.drawCount) {
+        newState.drawIndex = newState.deck.length - newState.drawCount
+    }
     newState = buildCardPiles(newState)
     return newState;
 }
