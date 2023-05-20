@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NavBar from './NavBar'
 import Cards from './Cards'
 import VisibleSwitch from '../containers/VisibleSwitch'
-import VisibleExerciseSelector from '../containers/VisibleExerciseSelector'
+import ExerciseSelector from './ExerciseSelector'
 
 export default class Settings extends Component {
   _generate = (e) => {
@@ -48,7 +48,7 @@ export default class Settings extends Component {
     )
 
     var customizeForm = (
-      <VisibleExerciseSelector suit={this.props.customizingSuit} />
+      <ExerciseSelector suit={this.props.customizingSuit} />
     )
 
     var pageContent
