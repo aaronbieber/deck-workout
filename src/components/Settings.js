@@ -3,68 +3,75 @@ import NavBar from './NavBar'
 import Cards from './Cards'
 import VisibleSwitch from '../containers/VisibleSwitch'
 import ExerciseSelector from './ExerciseSelector'
+import { useDispatch, useSelector } from 'react-redux'
+import { timerStop, timerReset, randomizeExercises } from '../actions'
 
-export default class Settings extends Component {
-  _generate = (e) => {
+const Settings = (props) => {
+  const dispatch = useDispatch()
+  const exercises = useSelector((state) => state.workout.exercises)
+  const customizingSuit = useSelector((state) => state.app.customizingSuit)
+  const drawLength = useSelector((state) => state.workout.draw.length)
+
+  const _generate = (e) => {
     e.preventDefault();
 
-    if (this.props.draw.length) {
+    if (drawLength > 0) {
       var confirmRestart = window.confirm("Really start over?");
       if (!confirmRestart) return;
     }
 
-    this.props.timerStop();
-    this.props.timerReset();
-    this.props.randomize();
+    dispatch(timerStop())
+    dispatch(timerReset())
+    dispatch(randomizeExercises())
   }
 
-  render() {
-    var settingsForm = (
-      <div className="columns controls">
-        <div className="column col-11 col-mx-auto">
-          <form className="form-horizontal" action="#" onSubmit={this._submit}>
+  var settingsForm = (
+    <div className="columns controls">
+      <div className="column col-11 col-mx-auto">
+        <form className="form-horizontal" action="#">
 
-            <div className="form-group">
-              <div className="col-4">
-                <label className="form-label">Tempt fate</label>
-              </div>
-              <div className="col-8 col-ml-auto">
-                <button onClick={this._generate} id="btn-randomize" className="btn">Randomize</button>
-              </div>
+          <div className="form-group">
+            <div className="col-4">
+              <label className="form-label">Tempt fate</label>
+            </div>
+            <div className="col-8 col-ml-auto">
+              <button onClick={_generate} id="btn-randomize" className="btn">Randomize</button>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="col-4">
+              <label className="form-label">Draw three</label>
             </div>
 
-            <div className="form-group">
-              <div className="col-4">
-                <label className="form-label">Draw three</label>
-              </div>
-
-              <div className="col-8">
-                <VisibleSwitch name="draw3" />
-              </div>
+            <div className="col-8">
+              <VisibleSwitch name="draw3" />
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    )
+    </div>
+  )
 
-    var customizeForm = (
-      <ExerciseSelector suit={this.props.customizingSuit} />
-    )
+  const customizeForm = (
+    <ExerciseSelector suit={customizingSuit} />
+  )
 
-    var pageContent
-    if (this.props.customizingSuit !== null) {
-      pageContent = customizeForm
-    } else {
-      pageContent = settingsForm
-    }
-
-    return (
-      <div>
-        <NavBar noUndo={true} />
-        <Cards exercises={this.props.exercises} edit={this.props.location.pathname === "/settings"} />
-
-        {pageContent}
-      </div>
-    );
+  var pageContent
+  if (customizingSuit !== null) {
+    pageContent = customizeForm
+  } else {
+    pageContent = settingsForm
   }
+
+  return (
+    <div>
+      <NavBar noUndo={true} />
+      <Cards exercises={exercises} edit={props.location.pathname === "/settings"} />
+
+      {pageContent}
+    </div>
+  );
 }
+
+export default Settings
