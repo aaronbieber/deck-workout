@@ -27,7 +27,8 @@ const ProgressBar = (props) => {
   var justDiscardedStartIndex = allCards.length - discard.length
 
   if (justDiscardedStartIndex > 1 && draw.length > 0) {
-    pctDrawn = Math.round((totalReps(allCards,
+    pctDrawn = Math.round((totalReps(
+      allCards,
       justDiscardedStartIndex - drawCount,
       justDiscardedStartIndex - 1) / allReps) * 100)
     widthDrawn = pctDrawn + '%'
@@ -36,7 +37,8 @@ const ProgressBar = (props) => {
 
   if (discard.length) {
     var pctPrevCompleted = 0
-    var pctJustCompleted = Math.round((totalReps(allCards,
+    var pctJustCompleted = Math.round((totalReps(
+      allCards,
       justDiscardedStartIndex,
       justDiscardedStartIndex + drawCount - 1) / allReps) * 100)
 
@@ -44,7 +46,8 @@ const ProgressBar = (props) => {
     // discard, only the "just" discarded, so we'll go out of
     // bounds if we try to do this; wait till the third draw
     if (discard.length > drawCount) {
-      pctPrevCompleted = Math.round((totalReps(allCards,
+      pctPrevCompleted = Math.round((totalReps(
+        allCards,
         justDiscardedStartIndex + drawCount,
         allCards.length - 1
       ) / allReps) * 100)
