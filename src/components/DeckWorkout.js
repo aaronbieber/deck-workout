@@ -5,7 +5,7 @@ import { setSeed } from '../actions/index.js'
 import NavBar from '../components/NavBar'
 import ProgressBar from '../components/ProgressBar'
 import CardTable from '../components/CardTable'
-import VisibleTimer from '../containers/VisibleTimer'
+import Timer from './Timer'
 import Cards from './Cards'
 import VisibleToast from '../containers/VisibleToast'
 
@@ -31,7 +31,7 @@ const DeckWorkout = (props) => {
           <NavBar home={true} />
           <Cards exercises={ exercises }/>
           <ProgressBar />
-          <VisibleTimer />
+          <Timer />
           <CardTable />
           <VisibleToast/>
         </div>

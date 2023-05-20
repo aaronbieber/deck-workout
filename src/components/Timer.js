@@ -1,30 +1,34 @@
-import React, { Component } from 'react';
+import { useDispatch, useSelector } from "react-redux"
+import { timerTick } from "../actions"
+import { useEffect, useRef } from "react"
 
-export default class Timer extends Component {
-    tick() {
-        this.props.tick()
-        this.frameId = requestAnimationFrame(() => this.tick())
+const Timer = (props) => {
+  const dispatch = useDispatch()
+  const running = useSelector((state) => state.timer.running)
+  const time = useSelector((state) => state.timer.time)
+  var frameId = useRef(0)
+
+  const tick = () => {
+    dispatch(timerTick())
+    frameId = requestAnimationFrame(() => tick())
+  }
+
+  useEffect(() => {
+    tick()
+    return () => { 
+      cancelAnimationFrame(frameId) 
     }
+  }, [])
 
-    componentDidMount() {
-        this.tick()
-    }
+  if (running) {
+    return (
+      <div className="timer">
+        <span>{time[0]}</span>:<span>{time[1]}</span>:<span>{time[2]}</span>
+      </div>
+    )
+  }
 
-    componentWillUnmount() {
-        cancelAnimationFrame(this.frameId)
-    }
-
-    render() {
-        var time = this.props.time
-
-        if (this.props.running) {
-            return (
-                <div className="timer">
-                  <span>{ time[0] }</span>:<span>{ time[1] }</span>:<span>{ time[2] }</span>
-                </div>
-            )
-        }
-
-        return null
-    }
+  return null
 }
+
+export default Timer
