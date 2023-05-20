@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import { useSelector } from "react-redux"
 
-export default class Toast extends Component {
-    render() {
-        var toastClass = this.props.toast ? 'toast-on' : 'toast-off'
-        return <div id="toast" className={ toastClass }>Copied to clipboard!</div>
-    }
+const Toast = (props) => {
+  const toast = useSelector((state) => state.workout.toast)
+
+  var toastClass = toast ? 'toast-on' : 'toast-off'
+  return <div id="toast" className={toastClass}>Copied to clipboard!</div>
 }
+
+export default Toast

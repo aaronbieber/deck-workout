@@ -7,7 +7,7 @@ import ProgressBar from '../components/ProgressBar'
 import CardTable from '../components/CardTable'
 import Timer from './Timer'
 import Cards from './Cards'
-import VisibleToast from '../containers/VisibleToast'
+import Toast from './Toast'
 
 const DeckWorkout = (props) => {
     const stateSeed = useSelector((state) => state.workout.seed)
@@ -33,7 +33,7 @@ const DeckWorkout = (props) => {
           <ProgressBar />
           <Timer />
           <CardTable />
-          <VisibleToast/>
+          <Toast/>
         </div>
     )
 }
