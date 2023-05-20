@@ -5,11 +5,11 @@ import { NavLink } from 'react-router-dom'
 const NavBar = (props) => {
   const dispatch = useDispatch()
   const drawIndex = useSelector((state) => state.workout.drawIndex)
-  const onInnerPage = (match, location) => {
+  const onInnerPage = () => {
     return props.home !== true
   }
 
-  const onMainPage = (match, location) => {
+  const onMainPage = () => {
     return props.home === true
   }
 
@@ -22,13 +22,10 @@ const NavBar = (props) => {
     <header className="navbar">
       <section className="navbar-section navbar-icon">
         <NavLink
-          to="/"
-          isActive={onInnerPage}
-          activeClassName="show-link"
-        >
+          className={() => !props.home ? "show-link" : ""}
+          to="/">
           <i className="material-icons">arrow_back</i>
         </NavLink>
-
         <i className={undoClass} onClick={() => dispatch(timerAwareUndo())}>undo</i>
       </section>
       <section className="navbar-center">
@@ -37,16 +34,13 @@ const NavBar = (props) => {
       <section className="navbar-section navbar-icon navbar-icon-right">
         <NavLink
           to="/help"
-          className="help-link"
-          isActive={onMainPage}
-          activeClassName="show-link">
+          className={() => "help-link" + (props.home ? " show-link" : "")}>
           <i className="material-icons help-icon">help</i>
         </NavLink>
 
         <NavLink
           to="/settings"
-          isActive={onMainPage}
-          activeClassName="show-link">
+          className={() => props.home ? "show-link" : ""}>
           <i className="material-icons">settings</i>
         </NavLink>
       </section>

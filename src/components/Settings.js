@@ -67,7 +67,7 @@ const Settings = (props) => {
   return (
     <div>
       <NavBar noUndo={true} />
-      <Cards exercises={exercises} edit={props.location.pathname === "/settings"} />
+      <Cards exercises={exercises} edit={true} />
 
       {pageContent}
     </div>

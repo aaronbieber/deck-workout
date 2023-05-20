@@ -1,19 +1,28 @@
-import React from 'react';
-import { render } from 'react-dom';
-import './assets/spectre.min.css';
-import './index.css';
+import { createRoot } from 'react-dom/client';
+import { configureStore } from '@reduxjs/toolkit';
 import Root from './components/Root';
 import unregister from './registerServiceWorker';
+
+import app from './reducers/app';
+import timer from './reducers/timer'
+import workout from './reducers/workout'
+
+import './assets/spectre.min.css';
+import './index.css';
 import { generate } from './actions';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import * as reducers from './reducers';
 
-var reducer = combineReducers(reducers);
-var store = createStore(reducer, applyMiddleware(thunk));
-store.dispatch(generate());
+const store = configureStore({
+  reducer: {
+    app,
+    timer,
+    workout
+  }
+})
+store.dispatch(generate())
 
-render(<Root store={ store } />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container)
+root.render(<Root store={store} />)
 
 // Don't use the service worker, and moreover, destroy its caches, fuck you very
 // much.

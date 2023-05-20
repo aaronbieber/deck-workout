@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { setSeed } from '../actions/index.js'
 import NavBar from '../components/NavBar'
 import ProgressBar from '../components/ProgressBar'
@@ -12,7 +12,7 @@ import Toast from './Toast'
 const DeckWorkout = (props) => {
     const stateSeed = useSelector((state) => state.workout.seed)
     const exercises = useSelector((state) => state.workout.exercises)
-    const history = useHistory()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -20,7 +20,8 @@ const DeckWorkout = (props) => {
         var seed = /^#[a-zA-Z0-9]{10}/.test(hash) ? hash.substring(1) : false
 
         if (seed === false) {
-            history.replace('/#' + stateSeed)
+            //history.replace('/#' + stateSeed)
+            navigate('/#' + stateSeed)
         } else if (seed !== stateSeed) {
             dispatch(setSeed(seed))
         }
