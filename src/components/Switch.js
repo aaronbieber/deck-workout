@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { toggleDrawThree } from "../actions";
 
-export default class Switch extends Component {
+const Switch = (props) => {
+  const dispatch = useDispatch()
+  const drawCount = useSelector((state) => state.workout.drawCount)
 
-    _toggleChecked = (e) => {
-        e.preventDefault();
-        this.props.toggleChecked();
-    }
-
-    _checked = () => {
-        return this.props.drawCount === 3;
-    }
-
-    render() {
-        return (
-            <label
-              onClick={ this._toggleChecked }
-              className="form-switch">
-              <input type="checkbox"
-                     name={ this.props.name }
-                     readOnly={ true }
-                     checked={ this.props.drawCount === 3 } />
-              <i className="form-icon"></i> { this.props.label }
-            </label>
-        );
-    }
+  return (
+    <label
+      className="form-switch">
+      <input type="checkbox"
+        onClick={() => dispatch(toggleDrawThree())}
+        name={props.name}
+        readOnly={true}
+        checked={drawCount === 3} />
+      <i className="form-icon"></i> {props.label}
+    </label>
+  );
 }
+
+export default Switch

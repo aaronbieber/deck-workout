@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar'
 import Cards from './Cards'
-import VisibleSwitch from '../containers/VisibleSwitch'
+import Switch from './Switch'
 import ExerciseSelector from './ExerciseSelector'
 import { useDispatch, useSelector } from 'react-redux'
 import { timerStop, timerReset, randomizeExercises } from '../actions'
@@ -45,7 +45,7 @@ const Settings = (props) => {
             </div>
 
             <div className="col-8">
-              <VisibleSwitch name="draw3" />
+              <Switch name="draw3" />
             </div>
           </div>
         </form>
