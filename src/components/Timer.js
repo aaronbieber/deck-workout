@@ -14,11 +14,12 @@ const Timer = (props) => {
   }
 
   useEffect(() => {
+    if (running) {
     tick()
-    return () => { 
+    } else {
       cancelAnimationFrame(frameId) 
     }
-  }, [])
+  }, [running])
 
   if (running) {
     return (
