@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import data from '../data/exercises'
 import { useDispatch, useSelector } from "react-redux"
-import { changeSuitExerciseAndEnd } from "../actions"
+import { changeSuitExerciseAndEnd } from "../reducers/workout"
 
 const ExerciseSelector = (props) => {
   const dispatch = useDispatch()

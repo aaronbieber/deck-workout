@@ -3,19 +3,19 @@ import { configureStore } from '@reduxjs/toolkit';
 import Root from './components/Root';
 import unregister from './registerServiceWorker';
 
-import app from './reducers/app';
-import timer from './reducers/timer'
-import workout from './reducers/workout'
+import appReducer from './reducers/app';
+import timerReducer from './reducers/timer'
+import workoutReducer from './reducers/workout';
 
 import './assets/spectre.min.css';
 import './index.css';
-import { generate } from './actions';
+import { generate } from './reducers/workout';
 
 const store = configureStore({
   reducer: {
-    app,
-    timer,
-    workout
+    app: appReducer,
+    timer: timerReducer,
+    workout: workoutReducer
   }
 })
 store.dispatch(generate())

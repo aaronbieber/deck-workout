@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { timerAwareUndo } from '../actions'
+import { undo } from '../reducers/workout'
 import { NavLink } from 'react-router-dom'
 
 const NavBar = (props) => {
@@ -26,7 +26,7 @@ const NavBar = (props) => {
           to="/">
           <i className="material-icons">arrow_back</i>
         </NavLink>
-        <i className={undoClass} onClick={() => dispatch(timerAwareUndo())}>undo</i>
+        <i className={undoClass} onClick={() => dispatch(undo())}>undo</i>
       </section>
       <section className="navbar-center">
         <h1>Wednesday Project</h1>

@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
-import { timerTick } from "../actions"
+import { timerRestart, timerStop, timerTick } from "../reducers/timer"
 import { useEffect, useRef } from "react"
 
 const Timer = (props) => {
   const dispatch = useDispatch()
   const running = useSelector((state) => state.timer.running)
   const time = useSelector((state) => state.timer.time)
+  const drawIndex = useSelector((state) => state.workout.drawIndex)
   var frameId = useRef(0)
 
   const tick = () => {
@@ -15,11 +16,20 @@ const Timer = (props) => {
 
   useEffect(() => {
     if (running) {
-    tick()
+      tick()
     } else {
-      cancelAnimationFrame(frameId) 
+      cancelAnimationFrame(frameId)
     }
   }, [running])
+
+  useEffect(() => {
+    // Stop the timer on the initial (un-drawn) card and the done card.
+    if (drawIndex === null || drawIndex === 0) {
+      dispatch(timerStop())
+    } else if (!running) {
+      dispatch(timerRestart())
+    }
+  }, [drawIndex])
 
   if (running) {
     return (

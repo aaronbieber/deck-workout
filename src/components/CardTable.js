@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { cloneObject } from '../utils'
 import DoneCard from './DoneCard'
 import debounce from 'lodash/debounce'
 import { useDispatch, useSelector } from 'react-redux'
-import { timerStart, timerStop, draw as drawAction } from '../actions'
+import { draw as drawAction } from '../reducers/workout'
+import { timerStart, timerStop } from '../reducers/timer'
 
 const CardTable = (props) => {
   const dispatch = useDispatch()

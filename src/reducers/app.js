@@ -1,22 +1,19 @@
-import * as types from '../actions/actionTypes'
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+const appSlice = createSlice({
+  name: 'app',
+  initialState: {
     customizingSuit: null
-}
-
-export default function app(state = initialState, action) {
-    switch (action.type) {
-    case types.CUSTOMIZE_SUIT:
-        return {
-            customizingSuit: action.suit
-        }
-
-    case types.CUSTOMIZE_SUIT_END:
-        return {
-            customizingSuit: null
-        }
-
-    default:
-        return state;
+  },
+  reducers: {
+    customizeSuit: (state, action) => {
+      state.customizingSuit = action.payload
+    },
+    customizeSuitEnd: (state) => {
+      state.customizingSuit = null
     }
-}
+  }
+})
+
+export const { customizeSuit, customizeSuitEnd } = appSlice.actions
+export default appSlice.reducer

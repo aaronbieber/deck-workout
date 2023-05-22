@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { customizeSuit } from '../actions';
+import { customizeSuit } from '../reducers/app';
 
 const CardRow = (props) => {
   const dispatch = useDispatch()

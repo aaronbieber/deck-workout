@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce'
-import { share } from '../actions'
+import { share } from '../reducers/workout'
 import { useDispatch, useSelector } from 'react-redux'
 
 const DoneCard = (props) => {

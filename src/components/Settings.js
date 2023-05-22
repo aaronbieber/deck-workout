@@ -4,7 +4,8 @@ import Cards from './Cards'
 import Switch from './Switch'
 import ExerciseSelector from './ExerciseSelector'
 import { useDispatch, useSelector } from 'react-redux'
-import { timerStop, timerReset, randomizeExercises } from '../actions'
+import { randomize } from '../reducers/workout'
+import { timerStop, timerReset } from '../reducers/timer'
 
 const Settings = (props) => {
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ const Settings = (props) => {
 
     dispatch(timerStop())
     dispatch(timerReset())
-    dispatch(randomizeExercises())
+    dispatch(randomize())
   }
 
   var settingsForm = (

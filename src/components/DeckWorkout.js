@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSeed } from '../actions/index.js'
+import { setSeed } from '../reducers/workout.js'
 import NavBar from '../components/NavBar'
 import ProgressBar from '../components/ProgressBar'
 import CardTable from '../components/CardTable'

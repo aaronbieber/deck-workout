@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDrawThree } from "../actions";
+import { toggleDrawThree } from "../reducers/workout";
 
 const Switch = (props) => {
   const dispatch = useDispatch()
