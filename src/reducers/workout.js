@@ -1,6 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import data from '../data/exercises'
-import { cloneObject } from '../utils'
 import seedrandom from 'seedrandom'
 import { customizeSuitEnd } from './app'
 const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
