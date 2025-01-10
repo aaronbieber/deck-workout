@@ -56,8 +56,7 @@ const CardTable = (props) => {
 
   const cardImageTag = (src, className) => {
     return (
-      <img onClick={_drawClick}
-        onTouchEnd={_drawClick}
+      <img onMouseUp={_drawClick}
         className={className}
         key={src}
         src={src}

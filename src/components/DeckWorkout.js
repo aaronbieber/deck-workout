@@ -5,6 +5,7 @@ import { setSeed } from '../reducers/workout.js'
 import NavBar from '../components/NavBar'
 import ProgressBar from '../components/ProgressBar'
 import CardTable from '../components/CardTable'
+import Version from '../components/Version'
 import Timer from './Timer'
 import Cards from './Cards'
 import Toast from './Toast'
@@ -35,6 +36,7 @@ const DeckWorkout = (props) => {
           <Timer />
           <CardTable />
           <Toast/>
+          <Version/>
         </div>
     )
 }

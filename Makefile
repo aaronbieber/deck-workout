@@ -2,7 +2,7 @@
 
 OPTS=-rlptdv
 EXCLUDE=--exclude '.git*' --exclude '.*' --exclude '\#*\#' --exclude Makefile
-DEST=aaronbieber.com:/var/www/deck.aaronbieber.com/htdocs/
+DEST=airborne@10.20.10.40:/var/www/deck.aaronbieber.com/htdocs/
 
 deploy:
 	rsync $(OPTS) $(EXCLUDE) ./build/ $(DEST)
